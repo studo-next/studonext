@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudoNext - Advanced AI College Predictor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #f8fafc; color: #0f172a; padding: 2.5rem 1rem; }
+        .container { max-width: 950px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 2rem; color: #0f172a; font-weight: 700; letter-spacing: -0.5px; }
+        
+        /* Form Box Structure */
+        .predictor-card { background: #ffffff; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 2rem; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
+        
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { font-size: 0.85rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group select, .form-group input { padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none; background: #fff; color: #0f172a; transition: all 0.2s; }
+        .form-group select:focus, .form-group input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        
+        /* HS Stream Dynamic Control Box */
+        #hs-stream-group { display: none; }
+        
+        .btn-action { width: 100%; background: #2563eb; color: white; border: none; padding: 1rem; font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer; margin-top: 1.5rem; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15); }
+        .btn-action:hover { background: #1d4ed8; }
+
+        /* Results Panel Dynamic Cards */
+        .results-section { display: none; margin-top: 2.5rem; }
+        .results-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 1.2rem; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+        .college-list { display: flex; flex-direction: column; gap: 1rem; }
+        .college-card { background: white; border: 1px solid #e2e8f0; padding: 1.5rem; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+        @media (max-width: 640px) { .college-card { flex-direction: column; align-items: flex-start; gap: 1.2rem; } }
+        .college-info h3 { font-size: 1.1rem; color: #0f172a; margin-bottom: 0.3rem; font-weight: 600; }
+        .college-info p { font-size: 0.9rem; color: #64748b; display: flex; align-items: center; gap: 6px; }
+        .btn-apply { background: #10b981; color: white; border: none; padding: 0.65rem 1.4rem; font-size: 0.9rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: background 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+        .btn-apply:hover { background: #059669; }
+
+        /* Independent Admission Form Page View */
+        #application-page { display: none; background: white; padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        .back-btn { background: none; border: none; color: #64748b; font-weight: 600; cursor: pointer; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 6px; font-size: 0.95rem; }
+        .back-btn:hover { color: #2563eb; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div id="predictor-page">
+        <h1><i class="fas fa-graduation-cap" style="color: #2563eb;"></i> AI College Predictor</h1>
+        
+        <div class="predictor-card">
+            <form id="predictorForm" onsubmit="executeCollegePrediction(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Last Qualification</label>
+                        <select id="last-qualification" onchange="evaluateQualificationLogic()" required>
+                            <option value="">-- Select Qualification --</option>
+                            <option value="Secondary">Secondary (10th Pass)</option>
+                            <option value="Higher Secondary">Higher Secondary (12th Pass)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="hs-stream-group">
+                        <label>Higher Secondary Stream</label>
+                        <select id="hs-stream">
+                            <option value="">-- Select Stream --</option>
+                            <option value="Science">Science</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="Arts">Arts</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Percentage Obtained (%)</label>
+                        <input type="number" id="percentage" min="30" max="100" placeholder="e.g. 72" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Target Career Stream</label>
+                        <select id="target-stream" required>
+                            <option value="">-- Select Target Course --</option>
+                            <option value="Engineering">B.Tech / Engineering</option>
+                            <option value="Diploma">Diploma Engineering (Polytechnic)</option>
+                            <option value="General">General Degree (B.Sc / B.Com / B.A)</option>
+                            <option value="Management">Management (BBA / BCA)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-action">
+                    <i class="fas fa-wand-magic-sparkles"></i> Predict Best Colleges
+                </button>
+            </form>
+        </div>
+
+        <div class="results-section" id="resultsSection">
+            <div class="results-title"><i class="fas fa-university" style="color:#2563eb;"></i> AI Recommended Colleges For You:</div>
+            <div class="college-list" id="collegeList"></div>
+        </div>
+    </div>
+
+    <div id="application-page">
+        <button class="back-btn" onclick="backToResultsScreen()"><i class="fas fa-arrow-left"></i> Back to Predicted List</button>
+        <h2 style="margin-bottom: 0.4rem; color: #0f172a; font-size: 1.5rem;">Admission Application Form</h2>
+        <p id="applying-college-text" style="margin-bottom: 2rem; color: #2563eb; font-weight: 600; font-size: 1.05rem;"></p>
+        
+        <form id="finalAdmissionForm" onsubmit="dispatchDataToGoogleSheet(event)">
+            <input type="hidden" id="hidden-college-tracker">
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="app-name" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Full Address</label>
+                    <input type="text" id="app-address" required placeholder="Village/Street, P.O, District, Pincode">
+                </div>
+                <div class="form-group">
+                    <label>Last Qualification</label>
+                    <select id="app-qualification" required>
+                        <option value="">-- Select --</option>
+                        <option value="10th Pass">10th Pass (Madhyamik)</option>
+                        <option value="12th Pass">12th Pass (Higher Secondary)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Last Examination Board Name</label>
+                    <input type="text" id="app-exam-name" required placeholder="e.g. WBBSE, WBCHSE, CBSE">
+                </div>
+                <div class="form-group">
+                    <label>Last Exam Percentage (%)</label>
+                    <input type="number" id="app-percentage" min="30" max="100" required placeholder="e.g. 75">
+                </div>
+                <div class="form-group">
+                    <label>Mobile / WhatsApp Number</label>
+                    <input type="tel" id="app-mobile" required placeholder="Enter 10-digit mobile number">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="app-email" required placeholder="name@example.com">
+                </div>
+            </div>
+            
+            <button type="submit" id="app-submit-btn" class="btn-action" style="background: #10b981; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);">
+                <i class="fas fa-paper-plane"></i> Submit Application to Counselor
+            </button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    // ⚠️ এখানে আপনার জেনারেট করা গুগল অ্যাপস স্ক্রিপ্ট ওয়েব লিঙ্কটি পেস্ট করুন
+    const googleSheetScriptURL = 'https://script.google.com/macros/s/AKfycbzUgJ-la2xeCeE8VcL2LuWd2OT_GiY7j-5c3UgseGqxAYjBbnKHOE7PgBhXMkRZ7Bfh/exec'; 
+
+    // ১. কন্ডিশনাল ড্রপডাউন কন্ট্রোলার লজিক
+    function evaluateQualificationLogic() {
+        const qualificationValue = document.getElementById('last-qualification').value;
+        const streamGroupElement = document.getElementById('hs-stream-group');
+        const streamSelectInput = document.getElementById('hs-stream');
+        
+        if (qualificationValue === 'Higher Secondary') {
+            streamGroupElement.style.display = 'flex';
+            streamSelectInput.required = true;
+        } else {
+            streamGroupElement.style.display = 'none';
+            streamSelectInput.required = false;
+            streamSelectInput.value = "";
+        }
+    }
+
+    // ২. কলেজ ডাটাবেস ইনডেক্স (পার্সেন্টেজ ক্রাইটেরিয়া ম্যাপিং)
+    const collegeDataset = [
+        { name: "Jadavpur University (JU), Kolkata", type: "Government", course: "Engineering", minPercent: 75, baseQual: "Higher Secondary" },
+        { name: "Heritage Institute of Technology (HIT), Kolkata", type: "Private / Top Tier", course: "Engineering", minPercent: 60, baseQual: "Higher Secondary" },
+        { name: "Kalyani Government Engineering College (KGEC)", type: "Government", course: "Engineering", minPercent: 70, baseQual: "Higher Secondary" },
+        { name: "APC Roy Polytechnic, Kolkata", type: "Government Diploma", course: "Diploma", minPercent: 55, baseQual: "Secondary" },
+        { name: "Ramakrishna Mission Shilpapitha, Belgharia", type: "Govt-Aided Diploma", course: "Diploma", minPercent: 60, baseQual: "Secondary" },
+        { name: "Central Calcutta Polytechnic, Kolkata", type: "Government Diploma", course: "Diploma", minPercent: 50, baseQual: "Secondary" },
+        { name: "Asutosh College, Kolkata", type: "Govt-Aided", course: "General", minPercent: 55, baseQual: "Higher Secondary" },
+        { name: "Techno Main Salt Lake, Kolkata", type: "Private", course: "Management", minPercent: 50, baseQual: "Higher Secondary" }
+    ];
+
+    // ৩. এক্সিকিউট ফিল্টারিং অ্যান্ড প্রেডিকশন
+    function executeCollegePrediction(event) {
+        event.preventDefault();
+        const qualification = document.getElementById('last-qualification').value;
+        const studentMarks = parseFloat(document.getElementById('percentage').value);
+        const desiredCourse = document.getElementById('target-stream').value;
+        
+        const outputColleges = collegeDataset.filter(college => {
+            return college.baseQual === qualification && college.course === desiredCourse && studentMarks >= college.minPercent;
+        });
+
+        const listContainer = document.getElementById('collegeList');
+        listContainer.innerHTML = "";
+
+        if (outputColleges.length === 0) {
+            listContainer.innerHTML = "<p style='color: #64748b; padding: 1.5rem; text-align:center;'>No premier institutions found matching your specific percentage criteria. Try adjusting your fields.</p>";
+        } else {
+            outputColleges.forEach(college => {
+                const card = document.createElement('div');
+                card.className = 'college-card';
+                card.innerHTML = `
+                    <div class="college-info">
+                        <h3>${college.name}</h3>
+                        <p><i class="fas fa-university"></i> ${college.type} &nbsp;|&nbsp; <i class="fas fa-book"></i> Stream: ${college.course}</p>
+                    </div>
+                    <button class="btn-apply" onclick="routeToApplicationView('${college.name}')">Apply Now <i class="fas fa-chevron-right"></i></button>
+                `;
+                listContainer.appendChild(card);
+            });
+        }
+        document.getElementById('resultsSection').style.display = 'block';
+    }
+
+    // ৪. পেজ স্লাইড অ্যান্ড রাউটিং মেকানিজম
+    function routeToApplicationView(collegeName) {
+        document.getElementById('predictor-page').style.display = 'none';
+        document.getElementById('application-page').style.display = 'block';
+        document.getElementById('hidden-college-tracker').value = collegeName;
+        document.getElementById('applying-college-text').innerHTML = `<i class="fas fa-graduation-cap"></i> Selected Institution: <span style="color:#0f172a; font-weight:700;">${collegeName}</span>`;
+        window.scrollTo(0, 0);
+    }
+
+    function backToResultsScreen() {
+        document.getElementById('application-page').style.display = 'none';
+        document.getElementById('predictor-page').style.display = 'block';
+    }
+
+    // ৫. এক্সপোর্ট অবজেক্ট ডাটা টু গুগল শিট পাইপলাইন
+    function dispatchDataToGoogleSheet(event) {
+        event.preventDefault();
+        
+        const submitBtn = document.getElementById('app-submit-btn');
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Secure Request...';
+        submitBtn.disabled = true;
+
+        const payloadParams = new URLSearchParams();
+        payloadParams.append('StudentName', document.getElementById('app-name').value);
+        payloadParams.append('Address', document.getElementById('app-address').value);
+        payloadParams.append('LastQualification', document.getElementById('app-qualification').value);
+        payloadParams.append('LastExamName', document.getElementById('app-exam-name').value);
+        payloadParams.append('Percentage', document.getElementById('app-percentage').value + '%');
+        payloadParams.append('Mobile', document.getElementById('app-mobile').value);
+        payloadParams.append('Email', document.getElementById('app-email').value);
+        payloadParams.append('AppliedCollege', document.getElementById('hidden-college-tracker').value);
+
+        fetch(googleSheetScriptURL, {
+            method: 'POST',
+            body: payloadParams,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .then(response => {
+            alert('Application Transmitted Successfully! Your strategic data is locked into the counselor dashboard.');
+            document.getElementById('finalAdmissionForm').reset();
+            backToResultsScreen();
+        })
+        .catch(error => {
+            console.error('Pipeline Processing Error:', error);
+            alert('Network endpoint connection dropped. Verify Google Script Deploy Status.');
+        })
+        .finally(() => {
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Application to Counselor';
+            submitBtn.disabled = false;
+        });
+    }
+</script>
+</body>
+</html>

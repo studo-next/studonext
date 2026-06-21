@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses & Training Hub | studonext</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="courses.css">
+</head>
+<body>
+
+    <header class="course-header">
+        <div class="container navbar">
+            <a href="index.html" class="logo">studo<span>next</span> <small>Courses</small></a>
+            <nav>
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <div class="course-hero">
+            <h1>Explore Professional Courses & Training</h1>
+            <p>আপনার বাড়ির কাছাকাছি সেরা অফলাইন ইনস্টিটিউট খুঁজুন অথবা আমাদের প্ল্যাটফর্মের এক্সক্লুসিভ ফ্রি অনলাইন কোর্সগুলো করে নিজের স্কিল বাড়ান।</p>
+        </div>
+
+        <section class="course-section">
+            <h2 class="section-title"><i class="fas fa-gift text-free"></i> Free Online Courses <small>(By studonext)</small></h2>
+            <div class="courses-grid">
+                
+                <div class="course-card free-card">
+                    <div class="course-thumb" style="background-color: #ecfdf5;"><i class="fab fa-wordpress" style="color: #21759b;"></i></div>
+                    <div class="course-body">
+                        <span class="badge badge-free">100% Free</span>
+                        <h3>WordPress Development Masterclass</h3>
+                        <p class="instructor">Instructor: Indrajit Samanta</p>
+                        <p class="desc">কোনো কোডিং ছাড়াই প্রফেশনাল ই-কমার্স ও ব্লগ ওয়েবসাইট তৈরি করা শিখুন একদম স্ক্র্যাচ থেকে।</p>
+                        <div class="course-footer">
+                            <span class="meta-info"><i class="fas fa-video"></i> 12+ Hours</span>
+                            <a href="#" class="btn btn-sm btn-enroll">Enroll Free</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card free-card">
+                    <div class="course-thumb" style="background-color: #fef2f2;"><i class="fab fa-python" style="color: #4b8bbe;"></i></div>
+                    <div class="course-body">
+                        <span class="badge badge-free">100% Free</span>
+                        <h3>Python Programming for Beginners</h3>
+                        <p class="instructor">Instructor: Tech Core Team</p>
+                        <p class="desc">লজিক বিল্ডিং, ডেটা স্ট্রাকচার এবং প্রজেক্ট বেসড লার্নিংয়ের মাধ্যমে পাইথনের বেসিক মজবুত করুন।</p>
+                        <div class="course-footer">
+                            <span class="meta-info"><i class="fas fa-video"></i> 15+ Hours</span>
+                            <a href="#" class="btn btn-sm btn-enroll">Enroll Free</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card free-card">
+                    <div class="course-thumb" style="background-color: #eff6ff;"><i class="fas fa-laptop-code" style="color: #2563eb;"></i></div>
+                    <div class="course-body">
+                        <span class="badge badge-free">100% Free</span>
+                        <h3>Frontend Web Design (HTML/CSS)</h3>
+                        <p class="instructor">Instructor: studonext Academy</p>
+                        <p class="desc">মডার্ন রেসপন্সিভ এবং ফ্লিপকার্ট-আমাজনের মতো প্রফেশনাল ওয়েব লেআউট ডিজাইন করা শিখুন।</p>
+                        <div class="course-footer">
+                            <span class="meta-info"><i class="fas fa-video"></i> 10+ Hours</span>
+                            <a href="#" class="btn btn-sm btn-enroll">Enroll Free</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="course-section" style="margin-bottom: 5rem;">
+            <div class="section-header-flex">
+                <h2 class="section-title"><i class="fas fa-map-marked-alt text-offline"></i> Nearby Offline Institutes & Training</h2>
+                <div class="location-select-box">
+                    <i class="fas fa-street-view"></i>
+                    <select id="userLocationFilter">
+                        <option value="Howrah">Howrah (Udaynarayanpur / Amta)</option>
+                        <option value="Kolkata">Kolkata Center</option>
+                        <option value="Hooghly">Hooghly Local</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="courses-grid">
+                
+                <div class="course-card offline-card">
+                    <div class="course-thumb" style="background-color: #fffbeb;"><i class="fas fa-calculator" style="color: #d97706;"></i></div>
+                    <div class="course-body">
+                        <span class="badge badge-offline">Offline Center</span>
+                        <h3>Tally Prime with GST Professional Course</h3>
+                        <p class="institute"><i class="fas fa-building"></i> Youth Computer Training Center (YCTC)</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Local Center (Udaynarayanpur Branch)</p>
+                        <p class="desc">অফিশিয়াল অ্যাকাউন্টস, ট্যাক্সেশন এবং জিএসটি বিলিংয়ের কমপ্লিট অফলাইন প্র্যাক্টিক্যাল ক্লাস।</p>
+                        <div class="course-footer">
+                            <span class="meta-info"><i class="fas fa-calendar-alt"></i> 6 Months Course</span>
+                            <button class="btn btn-sm btn-view-center" onclick="alert('Center Details:\nAddress: Udaynarayanpur Bus Stand, Howrah\nPhone: +91 98765 12345\nTiming: Mon-Sat (10 AM - 5 PM)')">View Center</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card offline-card">
+                    <div class="course-thumb" style="background-color: #faf5ff;"><i class="fas fa-palette" style="color: #7c3aed;"></i></div>
+                    <div class="course-body">
+                        <span class="badge badge-offline">Offline Center</span>
+                        <h3>Advanced Photoshop & Graphics Design</h3>
+                        <p class="institute"><i class="fas fa-building"></i> Media Tech Skills Academy</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Amta / Howrah Center</p>
+                        <p class="desc">ব্যানার, ফ্লায়ার, থাম্বনেইল এবং অ্যাডভান্সড ফটো এডিটিং এর জন্য সম্পূর্ণ ল্যাব-বেসড ট্রেনিং।</p>
+                        <div class="course-footer">
+                            <span class="meta-info"><i class="fas fa-calendar-alt"></i> 3 Months Training</span>
+                            <button class="btn btn-sm btn-view-center" onclick="alert('Center Details:\nAddress: Amta College Road, Howrah\nPhone: +91 90011 22334\nBatch Slot: Saturday & Sunday Specific')">View Center</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card offline-card">
+                    <div class="course-thumb" style="background-color: #fff1f2;"><i class="fas fa-user-shield" style="color: #e11d48;"></i></div>
+                    <div class="course-body">
+                        <span class="badge badge-offline">Offline Center</span>
+                        <h3>Hardware & Networking Cyber Security</h3>
+                        <p class="institute"><i class="fas fa-building"></i> Global Infotech Hub</p>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Kolkata (Near Station)</p>
+                        <p class="desc">পিসি বিল্ডিং, কমান্ড প্রম্পট অপটিমাইজেশন এবং নেটওয়ার্কিং সিকিউরিটির অফলাইন বুটক্যাম্প।</p>
+                        <div class="course-footer">
+                            <span class="meta-info"><i class="fas fa-calendar-alt"></i> 1 Year Diploma</span>
+                            <button class="btn btn-sm btn-view-center" onclick="alert('Center Details:\nAddress: Salt Lake Sector V, Kolkata\nPhone: +91 80011 55667\nPlacement: 100% Placement Assistance Available')">View Center</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

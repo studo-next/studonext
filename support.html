@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Support Hub | studonext</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #0f172a;
+            --background: #f8fafc;
+            --border: #e2e8f0;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--background); color: var(--text-main); line-height: 1.6; }
+        
+        /* Navbar */
+        .header { background: #ffffff; border-bottom: 1px solid var(--border); padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+        .container { width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--secondary); }
+        .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+        .nav-link:hover { color: var(--primary); }
+
+        /* Hero / Search Section */
+        .support-hero { text-align: center; padding: 4rem 1.5rem; background: radial-gradient(circle at top right, #eff6ff, transparent); border-bottom: 1px solid var(--border); }
+        .support-hero h1 { font-size: 2.5rem; color: var(--secondary); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.5rem; }
+        .support-hero p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+        
+        .search-box-wrapper { max-width: 550px; margin: 0 auto; position: relative; }
+        .search-box-wrapper i { position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; }
+        .search-input { width: 100%; padding: 1rem 1rem 1rem 3rem; font-size: 1rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); outline: none; transition: all 0.2s; }
+        .search-input:focus { border-color: var(--primary-light); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
+
+        /* Main Grid Wrapper */
+        .main-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin: 3rem auto; }
+
+        /* Documentation & FAQs */
+        .doc-section h2 { font-size: 1.4rem; color: var(--secondary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .doc-section h2 i { color: var(--primary); }
+        
+        .faq-item { background: #ffffff; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 1rem; overflow: hidden; transition: all 0.2s; }
+        .faq-trigger { width: 100%; padding: 1.25rem; text-align: left; background: none; border: none; font-size: 1.05rem; font-weight: 600; color: var(--secondary); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .faq-trigger i { color: var(--text-muted); transition: transform 0.2s; }
+        .faq-content { padding: 0 1.25rem; max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: #475569; font-size: 0.95rem; }
+        .faq-content p { padding-bottom: 1.25rem; }
+        
+        /* Active FAQ state */
+        .faq-item.active { border-color: var(--primary-light); box-shadow: 0 4px 12px rgba(30, 64, 175, 0.03); }
+        .faq-item.active .faq-trigger i { transform: rotate(180deg); color: var(--primary); }
+        .faq-item.active .faq-content { max-height: 300px; }
+
+        /* Sidebar Contact Channels */
+        .sidebar-card { background: #ffffff; border: 1px solid var(--border); padding: 1.75rem; border-radius: 12px; position: sticky; top: 100px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+        .sidebar-card h3 { color: var(--secondary); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .sidebar-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        
+        .contact-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.85rem; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.95rem; margin-bottom: 0.75rem; transition: transform 0.1s, opacity 0.2s; }
+        .contact-btn:active { transform: scale(0.98); }
+        .btn-whatsapp { background-color: #25d366; color: white !important; }
+        .btn-email { background-color: var(--primary); color: white !important; }
+        .contact-btn:hover { opacity: 0.9; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 2rem 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border); background: #ffffff; margin-top: 5rem; }
+
+        @media (max-width: 768px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .support-hero h1 { font-size: 2rem; }
+            .sidebar-card { position: static; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container navbar">
+            <a href="index.html" class="logo">studo<span>next</span></a>
+            <a href="index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </header>
+
+    <div class="support-hero">
+        <div class="container">
+            <h1>Student Support Hub</h1>
+            <p>আমাদের যেকোনো টুলস বা সার্ভিস ব্যবহারে সাহায্য পেতে ডকুমেন্টেশন ও নির্দেশনাবলী দেখুন</p>
+            <div class="search-box-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="supportSearch" class="search-input" placeholder="সমস্যা বা প্রশ্ন লিখে খুঁজুন (যেমন: Predictor, Resume)...">
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="main-layout">
+            
+            <div class="doc-section">
+                <h2><i class="fas fa-book-open"></i> Frequently Asked Documentation (FAQs)</h2>
+                
+                <div id="faqGroup">
+                    <div class="faq-item">
+                        <button class="faq-trigger">College Predictor-এর রেজাল্ট কতটা নির্ভুল?</button>
+                        <div class="faq-content">
+                            <p>আমাদের Advanced AI College Predictor গত কয়েক বছরের অফিশিয়াল কাট-অফ ডেটা এবং বোর্ডের নির্দিষ্ট ক্রাইটেরিয়া বিশ্লেষণ করে সম্ভাব্য কলেজ প্রদর্শন করে। এটি আপনার অ্যাডমিশন প্ল্যানিং সহজ করার জন্য একটি অত্যন্ত স্ট্র্যাটেজিক ও নির্ভুল গাইডলাইন প্রদান করে, তবে অফিশিয়াল কাউন্সেলিং প্রক্রিয়ার ওপর নজর রাখা আবশ্যক।</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger">Counselor ফর্ম সাবমিট করার পর পরবর্তী প্রসেস কী?</button>
+                        <div class="faq-content">
+                            <p>আপনি যখন <code>apply.html</code> বা <code>predictor.html</code> থেকে ফর্ম সাবমিট করেন, আপনার ডেটা সরাসরি আমাদের ভেরিফাইড এক্সপার্ট কাউন্সেলর ড্যাশবোর্ডে (Google Sheets Pipeline) চলে যায়। পরবর্তী ২৪ থেকে ৪৮ ঘণ্টার মধ্যে আমাদের কাউন্সেলররা আপনার প্রদত্ত মোবাইল নম্বরে বা ইমেইলে সরাসরি যোগাযোগ করবেন।</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger">Resume Builder-এ তৈরি করা রেজুমে কি এআই ট্র্যাকেবল (ATS Friendly)?</button>
+                        <div class="faq-content">
+                            <p>হ্যাঁ, studonext Resume Builder-এর লেআউটটি সম্পূর্ণ প্রফেশনাল এবং স্ট্যান্ডার্ড কোডিং আর্কিটেকচার মেনে তৈরি করা হয়েছে। এটি শতভাগ ATS Friendly (Applicant Tracking System), যা বিভিন্ন আইটি ফার্ম বা প্লেসমেন্ট ইন্টারভিউয়ের স্ক্রিনিংয়ে সহজে পাস করতে সাহায্য করে।</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger">Marketplace-এ বই বিক্রি করার সঠিক নিয়ম কী?</button>
+                        <div class="faq-content">
+                            <p>আমাদের মার্কেটপ্লেসটি সম্পূর্ণ পিয়ার-টু-পিয়ার (Peer-to-Peer)। আপনার ব্যবহৃত বা পুরনো বই বিক্রি করতে <code>marketplace.html</code>-এ গিয়ে বইয়ের নাম, লেখকের নাম, দাম এবং কন্ডিশন উল্লেখ করে সাবমিট করুন। কোনো ক্রেতা আপনার বই কিনতে আগ্রহী হলে সরাসরি আপনার সাথে যোগাযোগ করতে পারবেন। এখানে কোনো কমিশন নেওয়া হয় না।</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-trigger">CGPA to Percentage ক্যালকুলেটর কোন কোন বোর্ডের জন্য প্রযোজ্য?</button>
+                        <div class="faq-content">
+                            <p>আমাদের সিস্টেমে WBSCTE এবং MAKAUT বোর্ডের জন্য অফিশিয়াল সূত্র <code>(CGPA - 0.75) * 10</code> এবং AICTE-এর জন্য <code>CGPA * 9.5</code> ফর্মুলা ইন্টিগ্রেট করা আছে। আপনি ড্রপডাউন থেকে আপনার বোর্ড সিলেক্ট করে এক ক্লিকেই সঠিক পার্সেন্টেজ বের করতে পারবেন।</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <h3>সরাসরি সাহায্য চান?</h3>
+                    <p>ডকুমেন্টেশনে আপনার সমস্যার সমাধান না পেয়ে থাকলে আমাদের সাপোর্ট টিমের সাথে সরাসরি যোগাযোগ করুন।</p>
+                    
+                    <a href="https://wa.me/917872252866?text=Hello%20StudoNext%20Support,%20I%20need%20assistance%20regarding%20website%20services." 
+                       class="contact-btn btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                    
+                    <a href="mailto:support@studonext.com?subject=Student%20Support%20Query" class="contact-btn btn-email">
+                        <i class="fas fa-envelope"></i> Email Support
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 studonext. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion Logic
+        const faqTriggers = document.querySelectorAll('.faq-trigger');
+        
+        faqTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const parent = trigger.parentElement;
+                const isActive = parent.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-content').style.maxHeight = null;
+                });
+
+                if (!isActive) {
+                    parent.classList.add('active');
+                    const content = parent.querySelector('.faq-content');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        // Interactive Search Filter
+        const searchInput = document.getElementById('supportSearch');
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-trigger').innerText.toLowerCase();
+                const answer = item.querySelector('.faq-content').innerText.toLowerCase();
+                
+                if(question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

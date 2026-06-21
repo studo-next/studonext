@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudoNext | Premium Exam Suggestion Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --dark: #0f172a;
+            --gray-light: #f8fafc;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #f1f5f9; color: var(--text); padding: 0; }
+
+        /* ==========================================================================
+           PORTAL FIXED NAVIGATION HEADER
+           ========================================================================== */
+        .header {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo-group { display: flex; align-items: center; gap: 12px; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--dark); text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--primary-light); }
+        
+        .page-badge {
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: var(--gray-light);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-back-home {
+            text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem;
+            display: flex; align-items: center; gap: 8px; transition: color 0.2s ease;
+        }
+        .nav-back-home:hover { color: var(--primary); }
+
+        /* ==========================================================================
+           MAIN HUB HERO & FILTER ARCHITECTURE
+           ========================================================================== */
+        .main-container { max-width: 1200px; margin: 3rem auto; padding: 0 1.5rem; display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        
+        .hero-section { text-align: center; max-width: 800px; margin: 0 auto 1rem auto; }
+        .hero-section h1 { font-size: 2.2rem; color: var(--dark); font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.5px; }
+        .hero-section p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.5; }
+
+        /* Filter Control Panel Box */
+        .filter-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+        }
+
+        .filter-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 768px) { .filter-grid { grid-template-columns: 1fr; gap: 1rem; } }
+
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { font-size: 0.8rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group select { padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none; background: #fff; color: #0f172a; transition: all 0.2s; }
+        .form-group select:focus { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+
+        /* Dynamic Conditional Sub-Filters */
+        #branch-select-group, #sem-select-group { display: none; }
+
+        /* ==========================================================================
+           ULTIMATE SECURE VIEWPORT ARCHITECTURE
+           ========================================================================== */
+        .viewer-section { display: none; background: #ffffff; border-radius: 16px; border: 1px solid var(--border); padding: 1.5rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+        .viewer-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+        .viewer-header h3 { font-size: 1.15rem; color: var(--dark); display: flex; align-items: center; gap: 8px; }
+        .security-lock-tag { font-size: 0.75rem; background: #fee2e2; color: #ef4444; font-weight: 700; padding: 4px 10px; border-radius: 4px; display: flex; align-items: center; gap: 5px; }
+
+        /* No-Download Protected Iframe Shield Area */
+        .pdf-viewport-shield {
+            position: relative;
+            width: 100%;
+            height: 650px;
+            background: #cbd5e1;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Transparent glass sheet mapping over iframe to block clicks and selections completely */
+        .pdf-glass-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: transparent;
+            z-index: 10;
+        }
+
+        .pdf-viewport-shield iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Disable right click text alert layer */
+        body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+    </style>
+</head>
+<body oncontextmenu="return false;"> <header class="header">
+        <div class="navbar">
+            <div class="logo-group">
+                <a href="index.html" class="logo">studo<span>next</span></a>
+                <div class="page-badge">
+                    <i class="fas fa-file-pdf"></i> Suggestion Hub
+                </div>
+            </div>
+            <a href="index.html" class="nav-back-home">
+                <i class="fa-solid fa-house-user"></i> Home
+            </a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        
+        <div class="hero-section">
+            <h1>Unified Suggestion Center</h1>
+            <p>Select your academic stream, branch, or class from the secure interactive control matrix below to live-stream verified exam suggestions safely.</p>
+        </div>
+
+        <div class="filter-card">
+            <div class="filter-grid">
+                
+                <div class="form-group">
+                    <label>Select Course / Stream</label>
+                    <select id="main-course" onchange="processCategoryFiltering()" required>
+                        <option value="">-- Choose Course --</option>
+                        <option value="Secondary">WBBSE Class 10 (Madhyamik)</option>
+                        <option value="Higher Secondary">WBCHSE Class 12 (HS)</option>
+                        <option value="Diploma">Diploma in Engineering</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="branch-select-group">
+                    <label>Engineering Branch</label>
+                    <select id="branch-type" onchange="processCategoryFiltering()">
+                        <option value="">-- Choose Branch --</option>
+                        <option value="CST">Computer Science & Technology (DCST)</option>
+                        <option value="EE">Electrical Engineering (DEE)</option>
+                        <option value="ME">Mechanical Engineering (DME)</option>
+                        <option value="CE">Civil Engineering (DCE)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="sem-select-group">
+                    <label id="sub-or-sem-label">Target Module / Sem</label>
+                    <select id="dynamic-target" onchange="loadSecurePDFStream()" required>
+                        <option value="">-- Choose Option --</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="viewer-section" id="viewerSection">
+            <div class="viewer-header">
+                <h3 id="pdf-title-display"><i class="fas fa-file-pdf" style="color: #ef4444;"></i> Document View</h3>
+                <div class="security-lock-tag">
+                    <i class="fas fa-shield-halved"></i> Protected Viewport | Download Disabled
+                </div>
+            </div>
+            
+            <div class="pdf-viewport-shield">
+                <div class="pdf-glass-overlay"></div>
+                <iframe id="pdfSecureIframe" src=""></iframe>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+    // 📄 ১০০% কমপ্লিট ডাটা পাইপলাইন: প্রতিটা ডিপার্টমেন্টের ৬টি করে সেমিস্টার ম্যাপ করা হলো
+    const secondaryOptions = [
+        { text: "First Language Bengali", url: "YOUR_BENGALI_PDF_DIRECT_URL_HERE" },
+        { text: "Second Language English", url: "YOUR_ENGLISH_PDF_DIRECT_URL_HERE" },
+        { text: "Mathematics Core", url: "YOUR_MATH_PDF_DIRECT_URL_HERE" },
+        { text: "Physical Science", url: "YOUR_PHY_SCI_LINK_HERE" }
+    ];
+
+    const hsOptions = [
+        { text: "Physics Theory", url: "YOUR_PHYSICS_PDF_DIRECT_URL_HERE" },
+        { text: "Biological Science", url: "YOUR_BIO_PDF_DIRECT_URL_HERE" },
+        { text: "History & Social Studies", url: "YOUR_HISTORY_PDF_DIRECT_URL_HERE" },
+        { text: "Accountancy Practice", url: "YOUR_ACCOUNT_PDF_DIRECT_URL_HERE" }
+    ];
+
+    // ৪টি ব্রাঞ্চেরই ১ম থেকে ৬ষ্ঠ সেমিস্টার পর্যন্ত সম্পূর্ণ ম্যাপ
+    const diplomaSemesterMap = {
+        "CST": [
+            { text: "CST - Semester 1", url: "YOUR_CST_SEM1_LINK" },
+            { text: "CST - Semester 2", url: "YOUR_CST_SEM2_LINK" },
+            { text: "CST - Semester 3", url: "YOUR_CST_SEM3_LINK" },
+            { text: "CST - Semester 4", url: "YOUR_CST_SEM4_LINK" },
+            { text: "CST - Semester 5", url: "YOUR_CST_SEM5_LINK" },
+            { text: "CST - Semester 6", url: "YOUR_CST_SEM6_LINK" }
+        ],
+        "EE": [
+            { text: "EE - Semester 1", url: "YOUR_EE_SEM1_LINK" },
+            { text: "EE - Semester 2", url: "YOUR_EE_SEM2_LINK" },
+            { text: "EE - Semester 3", url: "YOUR_EE_SEM3_LINK" },
+            { text: "EE - Semester 4", url: "YOUR_EE_SEM4_LINK" },
+            { text: "EE - Semester 5", url: "YOUR_EE_SEM5_LINK" },
+            { text: "EE - Semester 6", url: "YOUR_EE_SEM6_LINK" }
+        ],
+        "ME": [
+            { text: "ME - Semester 1", url: "YOUR_ME_SEM1_LINK" },
+            { text: "ME - Semester 2", url: "YOUR_ME_SEM2_LINK" },
+            { text: "ME - Semester 3", url: "YOUR_ME_SEM3_LINK" },
+            { text: "ME - Semester 4", url: "YOUR_ME_SEM4_LINK" },
+            { text: "ME - Semester 5", url: "YOUR_ME_SEM5_LINK" },
+            { text: "ME - Semester 6", url: "YOUR_ME_SEM6_LINK" }
+        ],
+        "CE": [
+            { text: "CE - Semester 1", url: "YOUR_CE_SEM1_LINK" },
+            { text: "CE - Semester 2", url: "YOUR_CE_SEM2_LINK" },
+            { text: "CE - Semester 3", url: "YOUR_CE_SEM3_LINK" },
+            { text: "CE - Semester 4", url: "YOUR_CE_SEM4_LINK" },
+            { text: "CE - Semester 5", url: "YOUR_CE_SEM5_LINK" },
+            { text: "CE - Semester 6", url: "YOUR_CE_SEM6_LINK" }
+        ]
+    };
+
+    const mainCourseSelect = document.getElementById('main-course');
+    const branchGroup = document.getElementById('branch-select-group');
+    const branchTypeSelect = document.getElementById('branch-type');
+    const semGroup = document.getElementById('sem-select-group');
+    const targetLabel = document.getElementById('sub-or-sem-label');
+    const dynamicTargetSelect = document.getElementById('dynamic-target');
+    const viewerSection = document.getElementById('viewerSection');
+    const pdfSecureIframe = document.getElementById('pdfSecureIframe');
+    const pdfTitleDisplay = document.getElementById('pdf-title-display');
+
+    // ১. ক্যাটাগরি এবং ব্রাঞ্চ নির্বাচন ফিল্টারিং কন্ট্রোলার
+    function processCategoryFiltering() {
+        const selectedCourse = mainCourseSelect.value;
+        
+        viewerSection.style.display = "none";
+        pdfSecureIframe.src = "";
+        
+        if (selectedCourse === "") {
+            branchGroup.style.display = "none";
+            semGroup.style.display = "none";
+            return;
+        }
+
+        if (selectedCourse === "Secondary") {
+            branchGroup.style.display = "none";
+            branchTypeSelect.required = false;
+            semGroup.style.display = "flex";
+            targetLabel.innerText = "Select Subject";
+            populateDropdownOptions(secondaryOptions);
+        } 
+        else if (selectedCourse === "Higher Secondary") {
+            branchGroup.style.display = "none";
+            branchTypeSelect.required = false;
+            semGroup.style.display = "flex";
+            targetLabel.innerText = "Select Subject";
+            populateDropdownOptions(hsOptions);
+        } 
+        else if (selectedCourse === "Diploma") {
+            branchGroup.style.display = "flex";
+            branchTypeSelect.required = true;
+            
+            const selectedBranch = branchTypeSelect.value;
+            if(selectedBranch !== "") {
+                semGroup.style.display = "flex";
+                targetLabel.innerText = "Select Target Semester";
+                populateDropdownOptions(diplomaSemesterMap[selectedBranch] || []);
+            } else {
+                semGroup.style.display = "none";
+            }
+        }
+    }
+
+    // ২. ড্রপডাউনে অপশন পুশ করার লজিক
+    function populateDropdownOptions(optionsArray) {
+        dynamicTargetSelect.innerHTML = '<option value="">-- Choose Option --</option>';
+        optionsArray.forEach(opt => {
+            const optionNode = document.createElement('option');
+            optionNode.value = opt.url;
+            optionNode.innerText = opt.text;
+            dynamicTargetSelect.appendChild(optionNode);
+        });
+    }
+
+    // ৩. ফিক্সড সিকিউর আইফ্রেম লোডার (অটো-ডাউনলোড প্রোটেক্টেড)
+    function loadSecurePDFStream() {
+        const rawPdfUrl = dynamicTargetSelect.value;
+        const selectedText = dynamicTargetSelect.options[dynamicTargetSelect.selectedIndex].text;
+        
+        if (rawPdfUrl === "") {
+            viewerSection.style.display = "none";
+            pdfSecureIframe.src = "";
+            return;
+        }
+
+        // সিকিউর গুগল ডকুমেন্ট প্রিভিউ এনকোডার ইঞ্জিন
+        const secureViewerUrl = "https://docs.google.com/gview?embedded=true&url=" + encodeURIComponent(rawPdfUrl);
+
+        pdfTitleDisplay.innerHTML = `<i class="fas fa-file-pdf" style="color: #ef4444;"></i> ${selectedText}`;
+        pdfSecureIframe.src = secureViewerUrl;
+        
+        viewerSection.style.display = "block";
+        viewerSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ৪. কীবোর্ড ও রাইট ক্লিক প্রোটেকশন কন্ট্রোল
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey && e.keyCode === 80) || (e.ctrlKey && e.keyCode === 83)) {
+            e.preventDefault();
+            alert("Security policy alert: Document caching or manual transmission is restricted on StudoNext.");
+            return false;
+        }
+    });
+</script>
+</body>
+</html>
