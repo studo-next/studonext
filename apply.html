@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studonext - Application Form</title>
+    <link rel="stylesheet" href="predictor.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Application Form</h2>
+        
+        <div class="college-alert-box" id="selectedCollegeDisplay">
+            Selected College: Loading...
+        </div>
+
+        <form id="registrationForm">
+            <input type="hidden" id="collegeNameField" name="collegeName">
+
+            <div class="form-group">
+                <label for="studentName">Full Student Name</label>
+                <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter mobile number" required>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+        </form>
+
+        <a href="predictor.html" class="back-link">← Go Back To Predictor</a>
+    </div>
+
+    <script>
+        // Extract URL parameters passed dynamically
+        const queryParams = new URLSearchParams(window.location.search);
+        const selectedCollege = queryParams.get('college');
+
+        if (selectedCollege) {
+            document.getElementById('selectedCollegeDisplay').innerText = "Applying For: " + selectedCollege;
+            document.getElementById('collegeNameField').value = selectedCollege;
+        } else {
+            document.getElementById('selectedCollegeDisplay').innerText = "Applying For: General Admission Registration";
+            document.getElementById('collegeNameField').value = "General Admission";
+        }
+
+        const form = document.getElementById('registrationForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // INSERT YOUR GOOGLE WEB APP SCRIPT DEPLOYMENT URL LINK HERE
+        const GOOGLE_APP_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE';
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            submitBtn.innerText = "Submitting Data...";
+            submitBtn.disabled = true;
+
+            fetch(GOOGLE_APP_SCRIPT_URL, { 
+                method: 'POST', 
+                body: new FormData(form)
+            })
+            .then(response => {
+                alert('Success! Your application data has been successfully sent to Google Sheets.');
+                form.reset();
+                window.location.href = 'predictor.html'; 
+            })
+            .catch(error => {
+                console.error('Submission Error:', error.message);
+                alert('Something went wrong. Please check your App Script Deployment configuration.');
+                submitBtn.innerText = "Submit Application";
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Marketplace | studonext</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="marketplace.css">
+</head>
+<body>
+
+    <header class="market-header">
+        <div class="container navbar">
+            <a href="index.html" class="logo">studo<span>next</span> <small>Market</small></a>
+            <nav>
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="search-section">
+            <div>
+                <h2>Available Books for Sale</h2>
+                <p>A live peer-to-peer book marketplace for students to buy and sell academic materials easily.</p>
+            </div>
+        </div>
+
+        <div class="market-layout">
+            <div class="market-left">
+                <div class="market-grid" id="marketPageGrid">
+                    
+                    <div class="book-card">
+                        <div class="book-cover" style="background-color: #eff6ff;"><i class="fas fa-laptop-code" style="color: #3b82f6;"></i></div>
+                        <div class="book-details">
+                            <span class="badge badge-new">Like New</span>
+                            <h4>Python Programming & Data Structures</h4>
+                            <p class="book-author">By Oxford Publications</p>
+                            <div class="book-price-row">
+                                <span class="price">₹250</span>
+                                <button class="btn btn-sm btn-contact" data-book="Python Programming & Data Structures" data-price="250">Purchase</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover" style="background-color: #f0fdf4;"><i class="fas fa-calculator" style="color: #16a34a;"></i></div>
+                        <div class="book-details">
+                            <span class="badge badge-good">Good Condition</span>
+                            <h4>Engineering Mathematics - Vol 2</h4>
+                            <p class="book-author">By B.S. Grewal</p>
+                            <div class="book-price-row">
+                                <span class="price">₹320</span>
+                                <button class="btn btn-sm btn-contact" data-book="Engineering Mathematics - Vol 2" data-price="320">Purchase</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover" style="background-color: #fff7ed;"><i class="fas fa-microchip" style="color: #ea580c;"></i></div>
+                        <div class="book-details">
+                            <span class="badge badge-good">Good Condition</span>
+                            <h4>Digital Electronics Principles</h4>
+                            <p class="book-author">By Malvino & Leach</p>
+                            <div class="book-price-row">
+                                <span class="price">₹180</span>
+                                <button class="btn btn-sm btn-contact" data-book="Digital Electronics Principles" data-price="180">Purchase</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="market-right">
+                <div class="form-card">
+                    <h3><i class="fas fa-plus-circle"></i> Sell Your Book</h3>
+                    <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1.2rem;">List your old or unused books in our student directory instantly.</p>
+                    
+                    <form id="marketPageSellForm">
+                        <div class="form-group">
+                            <label for="mBookTitle">Book Title</label>
+                            <input type="text" id="mBookTitle" placeholder="e.g., Database Management Systems" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mBookAuthor">Author / Publisher</label>
+                            <input type="text" id="mBookAuthor" placeholder="e.g., Korth or McGraw Hill" required>
+                        </div>
+                        <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <label for="mBookPrice">Expected Price (₹)</label>
+                                <input type="number" id="mBookPrice" placeholder="Price" min="0" required>
+                            </div>
+                            <div>
+                                <label for="mBookCondition">Condition</label>
+                                <select id="mBookCondition" required>
+                                    <option value="Like New">Like New</option>
+                                    <option value="Good Condition">Good Condition</option>
+                                    <option value="Fair / Used">Fair / Used</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; margin-top: 0.5rem;"><i class="fas fa-bullhorn"></i> Post Book Listing</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="purchaseModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeModalBtn"><i class="fas fa-times"></i></button>
+            <h3>Complete Purchase Request</h3>
+            <p>Fill out this form to send your purchase request to the administrator/seller dashboard.</p>
+            
+            <form id="purchaseSubmitForm">
+                <input type="hidden" id="sheetBookTitle" name="bookTitle">
+                <input type="hidden" id="sheetBookPrice" name="bookPrice">
+
+                <div class="modal-form-group">
+                    <label>Selected Book</label>
+                    <input type="text" id="displayBookInfo" class="modal-input" style="background: #f1f5f9; font-weight: 600;" readonly>
+                </div>
+                <div class="modal-form-group">
+                    <label for="buyerName">Your Full Name</label>
+                    <input type="text" id="buyerName" name="buyerName" class="modal-input" placeholder="Enter your name" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="buyerEmail">Email Address</label>
+                    <input type="email" id="buyerEmail" name="buyerEmail" class="modal-input" placeholder="name@example.com" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="buyerPhone">Mobile Number</label>
+                    <input type="tel" id="buyerPhone" name="buyerPhone" class="modal-input" placeholder="Enter phone number" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="buyerMessage">Additional Notes (Optional)</label>
+                    <input type="text" id="buyerMessage" name="buyerMessage" class="modal-input" placeholder="Preferred location or timing details">
+                </div>
+                <button type="submit" class="btn-modal-submit" id="modalSubmitBtn">Confirm & Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // আপনার গুগল অ্যাপ স্ক্রিপ্ট ওয়েব অ্যাপ URL টি নিচে সিঙ্গেল কোটেশনের ভেতরে বসান
+        const GOOGLE_SHEET_MARKETPLACE_URL = 'https://script.google.com/macros/s/AKfycbzUgJ-la2xeCeE8VcL2LuWd2OT_GiY7j-5c3UgseGqxAYjBbnKHOE7PgBhXMkRZ7Bfh/exec';
+
+        const marketPageSellForm = document.getElementById('marketPageSellForm');
+        const marketPageGrid = document.getElementById('marketPageGrid');
+        const purchaseModal = document.getElementById('purchaseModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const purchaseSubmitForm = document.getElementById('purchaseSubmitForm');
+        const modalSubmitBtn = document.getElementById('modalSubmitBtn');
+
+        marketPageSellForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('mBookTitle').value;
+            const author = document.getElementById('mBookAuthor').value;
+            const price = parseFloat(document.getElementById('mBookPrice').value).toFixed(0);
+            const condition = document.getElementById('mBookCondition').value;
+
+            const newCard = document.createElement('div');
+            newCard.className = 'book-card';
+            newCard.innerHTML = `
+                <div class="book-cover" style="background-color: #f8fafc;"><i class="fas fa-book" style="color: #64748b;"></i></div>
+                <div class="book-details">
+                    <span class="badge ${condition === 'Like New' ? 'badge-new' : 'badge-good'}">${condition}</span>
+                    <h4>${title}</h4>
+                    <p class="book-author">By ${author}</p>
+                    <div class="book-price-row">
+                        <span class="price">₹${price}</span>
+                        <button class="btn btn-sm btn-contact" data-book="${title}" data-price="${price}">Purchase</button>
+                    </div>
+                </div>
+            `;
+            marketPageGrid.prepend(newCard);
+            marketPageSellForm.reset();
+            alert('Success! Your book listing has been live posted inside studonext Market.');
+            attachModalTriggers();
+        });
+
+        function attachModalTriggers() {
+            const contactButtons = document.querySelectorAll('.btn-contact');
+            contactButtons.forEach(button => {
+                button.onclick = function() {
+                    const bookName = this.getAttribute('data-book');
+                    const bookPrice = this.getAttribute('data-price');
+                    
+                    document.getElementById('sheetBookTitle').value = bookName;
+                    document.getElementById('sheetBookPrice').value = bookPrice;
+                    document.getElementById('displayBookInfo').value = `${bookName} (₹${bookPrice})`;
+                    
+                    purchaseModal.classList.add('active');
+                };
+            });
+        }
+
+        closeModalBtn.addEventListener('click', () => { purchaseModal.classList.remove('active'); });
+        window.onclick = function(event) { if (event.target == purchaseModal) { purchaseModal.classList.remove('active'); } }
+
+        purchaseSubmitForm.addEventListener('submit', e => {
+            e.preventDefault();
+            modalSubmitBtn.innerText = "Processing Pipeline...";
+            modalSubmitBtn.disabled = true;
+
+            fetch(GOOGLE_SHEET_MARKETPLACE_URL, { method: 'POST', body: new FormData(purchaseSubmitForm) })
+            .then(response => {
+                alert('Success! Your purchase request data has been successfully securely sent to the Google Sheets.');
+                purchaseSubmitForm.reset();
+                purchaseModal.classList.remove('active');
+            })
+            .catch(error => {
+                console.error('Pipeline Connection Error:', error.message);
+                alert('Connection Drop. Verify Google App Script Web App URL endpoint.');
+            })
+            .finally(() => {
+                modalSubmitBtn.innerText = "Confirm & Submit Request";
+                modalSubmitBtn.disabled = false;
+            });
+        });
+
+        attachModalTriggers();
+    </script>
+</body>
+</html>

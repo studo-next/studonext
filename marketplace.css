@@ -1,0 +1,85 @@
+/* ==========================================================================
+   STUDONEXT MAIN HUB & POPUP MODAL MERGED CSS STYLESHEET
+   ========================================================================== */
+:root {
+    --primary: #1e40af;
+    --primary-light: #3b82f6;
+    --secondary: #0f172a;
+    --background: #f8fafc;
+    --border: #cbd5e1;
+    --text-main: #334155;
+    --text-muted: #64748b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { background-color: var(--background); color: var(--text-main); }
+.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Header Navbar Styling */
+.market-header { background: #ffffff; border-bottom: 1px solid var(--border); padding: 1rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+.navbar { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 22px; font-weight: 700; color: var(--primary); text-decoration: none; }
+.logo span { color: var(--secondary); }
+.logo small { font-size: 0.8rem; background: var(--primary-light); color: #fff; padding: 2px 6px; border-radius: 4px; margin-left: 4px; font-weight: 500; }
+.nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+.nav-link:hover { color: var(--primary); }
+
+/* Main Marketplace Content Core Grid */
+.search-section { padding: 2.5rem 0 1.5rem 0; }
+.search-section h2 { font-size: 1.75rem; color: var(--secondary); font-weight: 700; margin-bottom: 0.25rem; }
+.search-section p { color: var(--text-muted); font-size: 0.95rem; }
+.market-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 3rem; }
+
+/* Cards Grid Layout Left Column */
+.market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.book-card { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+.book-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+.book-cover { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 3rem; border-bottom: 1px solid #f1f5f9; }
+.book-details { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; }
+
+/* Status Badges Components */
+.badge { display: inline-block; align-self: flex-start; font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 9999px; margin-bottom: 0.5rem; }
+.badge-new { background: #eff6ff; color: #1e40af; }
+.badge-good { background: #f0fdf4; color: #16a34a; }
+
+.book-details h4 { font-size: 1.05rem; color: var(--secondary); margin-bottom: 0.25rem; height: 1.3rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.book-author { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+.book-price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+.price { font-size: 1.2rem; font-weight: 700; color: var(--secondary); }
+
+/* Buttons Global Config Rules */
+.btn { display: inline-flex; align-items: center; justify-content: center; background: var(--primary); color: #fff; border: none; padding: 0.75rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s; font-size: 0.95rem; }
+.btn:hover { background: #1d4ed8; }
+.btn-sm { padding: 0.4rem 0.8rem; font-size: 0.85rem; border-radius: 6px; }
+
+/* Sidebar Sell Form Layout Right Column */
+.form-card { background: #ffffff; padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.02); position: sticky; top: 100px; }
+.form-card h3 { margin-bottom: 0.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; color: var(--secondary); }
+.form-card h3 i { color: var(--primary-light); }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--secondary); }
+.form-group input, .form-group select { width: 100%; padding: 0.65rem 0.8rem; border-radius: 6px; border: 1px solid var(--border); font-size: 0.9rem; outline: none; color: #0f172a; }
+.form-group input:focus, .form-group select:focus { border-color: var(--primary-light); }
+
+/* Interactive Purchase Modal Layout Architecture */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-card { background: #ffffff; padding: 2.5rem; border-radius: 16px; width: 100%; max-width: 500px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); position: relative; transform: scale(0.9); transition: transform 0.3s ease; }
+.modal-overlay.active .modal-card { transform: scale(1); }
+.modal-close { position: absolute; top: 1.25rem; right: 1.25rem; background: none; border: none; font-size: 1.25rem; color: #64748b; cursor: pointer; }
+.modal-close:hover { color: #0f172a; }
+.modal-card h3 { font-size: 1.5rem; color: #0f172a; margin-bottom: 0.5rem; font-weight: 700; }
+.modal-card p { color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem; }
+.modal-form-group { margin-bottom: 1.25rem; }
+.modal-form-group label { display: block; font-size: 0.875rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem; }
+.modal-input { width: 100%; padding: 0.75rem 1rem; font-size: 0.95rem; border-radius: 8px; border: 1px solid #cbd5e1; outline: none; }
+.modal-input:focus { border-color: #3b82f6; }
+.btn-modal-submit { width: 100%; padding: 0.85rem; background-color: #1e40af; color: #ffffff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; }
+.btn-modal-submit:hover { background-color: #1d4ed8; }
+.btn-modal-submit:disabled { background-color: #94a3b8; cursor: not-allowed; }
+
+@media (max-width: 768px) {
+    .market-layout { grid-template-columns: 1fr; }
+    .market-grid { grid-template-columns: 1fr; }
+    .form-card { position: static; }
+}
