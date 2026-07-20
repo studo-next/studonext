@@ -340,5 +340,20 @@
         return JSON.parse(jsonPayload);
     }
 </script>
+<script>
+    // পেজ লোড হওয়ার সাথে সাথে চেক করবে লগইন করা আছে কি না
+    window.addEventListener('load', () => {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const username = localStorage.getItem('username');
+        const loginBtn = document.querySelector('.nav-login-btn');
+
+        if (isLoggedIn === 'true' && username && loginBtn) {
+            // লগইন থাকলে বাটনটি প্রোফাইল বাটনে পরিণত হবে
+            loginBtn.innerHTML = '<i class="fas fa-user-circle"></i> ' + username;
+            loginBtn.style.background = '#2563eb'; // আপনার পছন্দের কালার
+            loginBtn.onclick = null; // বাটনটিতে ক্লিক করলে আর মডাল ওপেন হবে না
+        }
+    });
+</script>
 </body>
 </html>
