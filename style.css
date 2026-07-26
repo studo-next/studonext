@@ -612,3 +612,105 @@ h1, h2, h3, h4 {
     .hero-graphic { width: 250px; height: 250px; }
     .graphic-icon { font-size: 4rem; }
 }
+/* CYBER SECURITY OVERLAY */
+
+#cyber-alert{
+    position:fixed;
+    inset:0;
+    background:rgba(2,6,23,.97);
+    backdrop-filter:blur(8px);
+    z-index:99999999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+#cyber-alert.active{
+    display:flex;
+}
+
+#cyber-alert::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(59,130,246,.05) 3px
+    );
+    animation:scanline 6s linear infinite;
+}
+
+.cyber-box{
+    width:min(90%,700px);
+    border:1px solid rgba(59,130,246,.4);
+    background:rgba(15,23,42,.9);
+    box-shadow:0 0 40px rgba(59,130,246,.25);
+    border-radius:20px;
+    padding:35px;
+    color:#fff;
+    text-align:center;
+}
+
+.cyber-title{
+    font-size:2rem;
+    color:#3b82f6;
+    margin-bottom:15px;
+    text-transform:uppercase;
+    letter-spacing:3px;
+}
+
+.cyber-status{
+    color:#10b981;
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+.cyber-progress{
+    width:100%;
+    height:12px;
+    background:#0f172a;
+    border-radius:50px;
+    overflow:hidden;
+    margin:20px 0;
+}
+
+.cyber-bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#2563eb,#10b981);
+    animation:loadBar 10s linear forwards;
+}
+
+.cyber-terminal{
+    text-align:left;
+    margin-top:25px;
+    font-family:monospace;
+    color:#22c55e;
+    line-height:1.8;
+    font-size:.95rem;
+}
+
+.cyber-warning{
+    color:#f87171;
+    margin-top:20px;
+    font-weight:700;
+    animation:blink 1s infinite;
+}
+
+@keyframes loadBar{
+    from{width:0}
+    to{width:100%}
+}
+
+@keyframes blink{
+    50%{opacity:.3}
+}
+
+@keyframes scanline{
+    from{transform:translateY(-100%)}
+    to{transform:translateY(100%)}
+}

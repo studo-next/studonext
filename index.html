@@ -297,8 +297,60 @@
                 loginBtn.onclick = () => { window.location.href = 'dashboard.html'; };
             }
         });
+        let cyberTriggered = false;
+
+function activateCyberAlert(){
+
+    if(cyberTriggered) return;
+
+    cyberTriggered = true;
+
+    document
+    .getElementById("cyber-alert")
+    .classList.add("active");
+}
+
+setInterval(()=>{
+
+    if(
+        window.outerWidth - window.innerWidth > 160 ||
+        window.outerHeight - window.innerHeight > 160
+    ){
+        activateCyberAlert();
+    }
+
+},1000);
     </script>
 
+</div>
+<div id="cyber-alert">
+    <div class="cyber-box">
+
+        <div class="cyber-title">
+            SECURITY PROTOCOL
+        </div>
+
+        <div class="cyber-status">
+            Developer Tools Detected
+        </div>
+
+        <div class="cyber-progress">
+            <div class="cyber-bar"></div>
+        </div>
+
+        <div class="cyber-terminal">
+            > Initializing Security Engine...<br>
+            > Verifying Browser Environment...<br>
+            > Activating Protection Layer...<br>
+            > Monitoring Session Activity...<br>
+            > Access Restriction Enabled...
+        </div>
+
+        <div class="cyber-warning">
+            Please close Developer Tools to continue.
+        </div>
+
+    </div>
 </div>
 </body>
 </html>
