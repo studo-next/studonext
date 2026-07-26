@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudoNext Studio - Secure Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #f0f2f5; color: #1e293b; padding: 20px; }
+        .login-container { display: flex; justify-content: center; align-items: center; min-height: 85vh; }
+        .login-box, .admin-panel { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); width: 100%; max-width: 750px; margin: auto; }
+        .hidden { display: none !important; }
+        
+        input[type="text"], input[type="password"], textarea { width: 100%; padding: 12px; margin: 8px 0 16px 0; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box; font-size: 14px; outline: none; }
+        input:focus, textarea:focus { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15); }
+        
+        button { background: #4f46e5; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; transition: background 0.2s; }
+        button:hover { background: #4338ca; }
+        
+        .delete-btn { background: #dc2626; padding: 6px 12px; font-size: 12px; margin-left: 5px; }
+        .delete-btn:hover { background: #b91c1c; }
+        .edit-btn { background: #2563eb; padding: 6px 12px; font-size: 12px; }
+        .edit-btn:hover { background: #1d4ed8; }
+        
+        .error { color: #dc2626; font-size: 13px; font-weight: 600; margin-top: 5px; }
+        .success { color: #16a34a; font-size: 13px; font-weight: 600; margin-top: 5px; }
+        
+        .studio-card { display: flex; align-items: center; background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 12px; border: 1px solid #e5e7eb; gap: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .studio-card img { width: 80px; height: 60px; object-fit: cover; border-radius: 4px; background: #e5e7eb; }
+        .studio-info { flex-grow: 1; }
+        .studio-info h4 { margin: 0 0 4px 0; font-size: 15px; color: #111827; font-weight: 700; }
+        .studio-info p { margin: 0; font-size: 13px; color: #6b7280; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #f3f4f6; padding-bottom: 15px; }
+        .file-label { display: block; margin-top: 10px; font-size: 13px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.5px; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. High Security Login Viewport -->
+    <div id="loginSection" class="login-container">
+        <div class="login-box" style="max-width: 400px;">
+            <h2 style="margin-bottom: 8px;"><i class="fas fa-user-shield" style="color:#4f46e5;"></i> Studio Admin Login</h2>
+            <p style="font-size: 13px; color: #6b7280; margin-bottom: 20px;">Enter Admin ID and all 3 security passwords.</p>
+            
+            <input type="text" id="adminId" placeholder="Admin ID">
+            <input type="password" id="pass1" placeholder="First Password">
+            <input type="password" id="pass2" placeholder="Second Password">
+            <input type="password" id="pass3" placeholder="Third Password (PIN)">
+            
+            <button onclick="checkLogin()" style="width: 100%; margin-top: 5px;"><i class="fas fa-key"></i> Authenticate & Access</button>
+            <p id="loginError" class="error"></p>
+        </div>
+    </div>
+
+    <!-- 2. Admin Content Management Dashboard -->
+    <div id="adminSection" class="admin-panel hidden">
+        <div class="header-flex">
+            <h2>StudoNext Content Studio</h2>
+            <div>
+                <a href="news.html" target="_blank" style="font-size: 14px; color: #4f46e5; text-decoration: none; margin-right: 15px; font-weight: bold;">View Live Site ↗</a>
+                <button onclick="location.reload()" style="background: #6b7280; padding: 6px 12px; font-size: 12px;">Logout</button>
+            </div>
+        </div>
+
+        <!-- Post / Edit Form -->
+        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #e2e8f0;">
+            <h3 id="formHeading" style="margin-top: 0; color: #1e293b;">Create New Post</h3>
+            <input type="hidden" id="editDocId">
+            
+            <label class="file-label">News Title</label>
+            <input type="text" id="newsTitle" placeholder="Enter post title...">
+            
+            <label class="file-label">Upload Banner / Image</label>
+            <input type="file" id="newsImage" accept="image/*" onchange="previewImage(event)">
+            <div id="imgPreviewContainer" style="margin: 10px 0; display: none;">
+                <img id="outputPreview" style="max-height: 120px; border-radius: 6px; border: 1px solid #cbd5e1;">
+            </div>
+
+            <label class="file-label">News Description</label>
+            <textarea id="newsDesc" rows="4" placeholder="Write full description here..."></textarea>
+            
+            <div style="margin-top: 15px;">
+                <button id="saveBtn" onclick="saveNews()"><i class="fas fa-paper-plane"></i> Publish Post</button>
+                <button id="cancelEditBtn" class="hidden" onclick="resetForm()" style="background: #6b7280; margin-left: 5px;">Cancel</button>
+            </div>
+            <p id="statusMsg"></p>
+        </div>
+
+        <!-- Live Content Stream Management -->
+        <h3 style="color: #1e293b; margin-bottom: 12px;">Live Published News Stream</h3>
+        <div id="adminNewsList">
+            <p style="color: #666;"><i class="fas fa-spinner fa-spin"></i> Loading studio content...</p>
+        </div>
+    </div>
+
+    <!-- Firebase System Modules -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // ⚠️ আপনার ফায়ারবেস কনফিগারেশনের তথ্য এখানে বসাবেন
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // অ্যাডমিন পাসওয়ার্ড ও পিন কনফিগারেশন
+        const correctId = "indrajit";
+        const password1st = "indrajit";
+        const password2nd = "indra";
+        const password3rd = "711226";
+
+        let base64Image = "";
+
+        window.checkLogin = function() {
+            let id = document.getElementById('adminId').value;
+            let p1 = document.getElementById('pass1').value;
+            let p2 = document.getElementById('pass2').value;
+            let p3 = document.getElementById('pass3').value;
+            
+            if(id === correctId && p1 === password1st && p2 === password2nd && p3 === password3rd) {
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('adminSection').classList.remove('hidden');
+                loadStudioContentRealTime();
+            } else {
+                document.getElementById('loginError').innerText = "Invalid ID or one of the passwords is incorrect!";
+            }
+        }
+
+        window.previewImage = function(event) {
+            let reader = new FileReader();
+            reader.onload = function(){
+                base64Image = reader.result;
+                let preview = document.getElementById('outputPreview');
+                preview.src = base64Image;
+                document.getElementById('imgPreviewContainer').style.display = 'block';
+            }
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        // রিয়েল-টাইম কনটেন্ট স্ট্রিমিং ও লিস্ট আপডেট
+        function loadStudioContentRealTime() {
+            const listContainer = document.getElementById('adminNewsList');
+            const q = query(collection(db, "dailyNews"), orderBy("timestamp", "desc"));
+
+            onSnapshot(q, (querySnapshot) => {
+                listContainer.innerHTML = "";
+                
+                if(querySnapshot.empty) {
+                    listContainer.innerHTML = "<p style='color: #666;'>No published news available.</p>";
+                    return;
+                }
+
+                querySnapshot.forEach((docSnap) => {
+                    let data = docSnap.data();
+                    let id = docSnap.id;
+                    let imgSrc = data.image ? data.image : "https://via.placeholder.com/80x60?text=No+Image";
+                    
+                    let card = document.createElement('div');
+                    card.className = 'studio-card';
+                    card.innerHTML = `
+                        <img src="${imgSrc}" alt="Thumbnail">
+                        <div class="studio-info">
+                            <h4>${data.title}</h4>
+                            <p>${data.description}</p>
+                            <small style="color: #9ca3af; font-size: 11px;">Published: ${data.date}</small>
+                        </div>
+                        <div>
+                            <button class="edit-btn" onclick="prepareEdit('${id}', \`${data.title.replace(/`/g, '\\`')}\`, \`${data.description.replace(/`/g, '\\`')}\`, \`${data.image || ''}\`)">Edit</button>
+                            <button class="delete-btn" onclick="deleteNews('${id}')">Delete</button>
+                        </div>
+                    `;
+                    listContainer.appendChild(card);
+                });
+            }, (error) => {
+                console.error("Error loading studio content: ", error);
+                listContainer.innerHTML = "<p style='color: red;'>Failed to load studio content.</p>";
+            });
+        }
+
+        window.saveNews = async function() {
+            let title = document.getElementById('newsTitle').value.trim();
+            let desc = document.getElementById('newsDesc').value.trim();
+            let editId = document.getElementById('editDocId').value;
+            let status = document.getElementById('statusMsg');
+
+            if(!title || !desc) {
+                status.className = "error";
+                status.innerText = "Title and Description are required!";
+                return;
+            }
+
+            try {
+                let postData = {
+                    title: title,
+                    description: desc
+                };
+
+                if(base64Image) {
+                    postData.image = base64Image;
+                }
+
+                if(editId) {
+                    const docRef = doc(db, "dailyNews", editId);
+                    await updateDoc(docRef, postData);
+                    status.className = "success";
+                    status.innerText = "Post updated successfully!";
+                } else {
+                    postData.date = new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+                    postData.timestamp = Date.now();
+                    if(!postData.image) postData.image = "";
+
+                    await addDoc(collection(db, "dailyNews"), postData);
+                    status.className = "success";
+                    status.innerText = "New post published live successfully!";
+                }
+
+                resetForm();
+            } catch (e) {
+                console.error("Error saving document: ", e);
+                status.className = "error";
+                status.innerText = "Operation failed! Check console for errors.";
+            }
+        }
+
+        window.prepareEdit = function(id, title, desc, img) {
+            document.getElementById('editDocId').value = id;
+            document.getElementById('newsTitle').value = title;
+            document.getElementById('newsDesc').value = desc;
+            
+            if(img) {
+                base64Image = img;
+                document.getElementById('outputPreview').src = img;
+                document.getElementById('imgPreviewContainer').style.display = 'block';
+            } else {
+                base64Image = "";
+                document.getElementById('imgPreviewContainer').style.display = 'none';
+            }
+
+            document.getElementById('formHeading').innerText = "Edit Post";
+            document.getElementById('saveBtn').innerHTML = "<i class='fas fa-sync'></i> Update Post";
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        window.resetForm = function() {
+            document.getElementById('editDocId').value = "";
+            document.getElementById('newsTitle').value = "";
+            document.getElementById('newsDesc').value = "";
+            document.getElementById('newsImage').value = "";
+            document.getElementById('imgPreviewContainer').style.display = 'none';
+            base64Image = "";
+            document.getElementById('formHeading').innerText = "Create New Post";
+            document.getElementById('saveBtn').innerHTML = "<i class='fas fa-paper-plane'></i> Publish Post";
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+            document.getElementById('statusMsg').innerText = "";
+        }
+
+        window.deleteNews = async function(id) {
+            if(confirm("Are you sure you want to delete this news post? It will instantly be removed from live site.")) {
+                try {
+                    await deleteDoc(doc(docRef = doc(db, "dailyNews", id)));
+                    alert("Post deleted successfully!");
+                } catch (error) {
+                    console.error("Error deleting document: ", error);
+                    alert("Failed to delete post!");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

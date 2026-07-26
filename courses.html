@@ -3,46 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses & Training Hub | studonext</title>
+    <title>Professional Courses & Skill Training Hub | studonext</title>
+    <meta name="description" content="Explore free online technical certification courses and accredited offline training institutes on studonext.">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="courses.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
-    <header class="course-header">
+    <!-- Unified Navigation Header -->
+    <header class="header">
         <div class="container navbar">
-            <a href="index.html" class="logo">studo<span>next</span> <small>Courses</small></a>
-            <nav>
-                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Back to Home</a>
+            <a href="index.html" class="logo">studo<span>next</span></a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="predictor.html" class="nav-link">College Predictor</a>
+                <a href="marketplace.html" class="nav-link">Book Marketplace</a>
+                <a href="courses.html" class="nav-link active">Courses</a>
+                <a href="suggestions.html" class="nav-link">Exam Suggestions</a>
+                <a href="resume-builder.html" class="nav-link">Resume Builder</a>
+                <a href="news.html" class="nav-link">News</a>
+                <a href="admin.html" class="nav-admin-link">Admin Login</a>
+                <button class="btn btn-sm btn-primary nav-login-btn" onclick="openLoginModal()">Login / Sign Up</button>
             </nav>
         </div>
     </header>
 
     <main class="container">
         
+        <!-- Hero Header -->
         <div class="course-hero">
-            <h1>Explore Professional Courses & Training</h1>
-            <p>আপনার বাড়ির কাছাকাছি সেরা অফলাইন ইনস্টিটিউট খুঁজুন অথবা আমাদের প্ল্যাটফর্মের এক্সক্লুসিভ ফ্রি অনলাইন কোর্সগুলো করে নিজের স্কিল বাড়ান।</p>
+            <h1>Industry-Ready Vocational & Technical Skills</h1>
+            <p>Master high-demand technical frameworks through curated self-paced online certifications or connect directly with verified regional offline training centers.</p>
         </div>
 
+        <!-- Free Online Certification Programs -->
         <section class="course-section">
-            <h2 class="section-title"><i class="fas fa-gift text-free"></i> Free Online Courses <small>(By studonext)</small></h2>
+            <h2 class="section-title"><i class="fas fa-certificate text-free"></i> Verified Free Online Courses</h2>
             <div class="courses-grid">
                 
                 <div class="course-card free-card">
                     <div class="course-thumb" style="background-color: #ecfdf5;"><i class="fab fa-wordpress" style="color: #21759b;"></i></div>
                     <div class="course-body">
-                        <span class="badge badge-free">100% Free</span>
-                        <h3>WordPress Development Masterclass</h3>
-                        <p class="instructor">Instructor: Indrajit Samanta</p>
-                        <p class="desc">কোনো কোডিং ছাড়াই প্রফেশনাল ই-কমার্স ও ব্লগ ওয়েবসাইট তৈরি করা শিখুন একদম স্ক্র্যাচ থেকে।</p>
+                        <span class="badge badge-free">100% Free Certification</span>
+                        <h3>Full Stack WordPress Development</h3>
+                        <p class="instructor"><i class="fas fa-user-tie"></i> Mentor: Indrajit Samanta</p>
+                        <p class="desc">Learn enterprise web portal development, WooCommerce architectures, custom themes, and server deployment strategies.</p>
                         <div class="course-footer">
-                            <span class="meta-info"><i class="fas fa-video"></i> 12+ Hours</span>
-                            <a href="#" class="btn btn-sm btn-enroll">Enroll Free</a>
+                            <span class="meta-info"><i class="fas fa-clock"></i> 12 Hours Modules</span>
+                            <button class="btn btn-sm btn-enroll" onclick="triggerEnrollmentModal('Full Stack WordPress Development', 'Online Self-Paced')">Enroll Now</button>
                         </div>
                     </div>
                 </div>
@@ -50,13 +70,13 @@
                 <div class="course-card free-card">
                     <div class="course-thumb" style="background-color: #fef2f2;"><i class="fab fa-python" style="color: #4b8bbe;"></i></div>
                     <div class="course-body">
-                        <span class="badge badge-free">100% Free</span>
-                        <h3>Python Programming for Beginners</h3>
-                        <p class="instructor">Instructor: Tech Core Team</p>
-                        <p class="desc">লজিক বিল্ডিং, ডেটা স্ট্রাকচার এবং প্রজেক্ট বেসড লার্নিংয়ের মাধ্যমে পাইথনের বেসিক মজবুত করুন।</p>
+                        <span class="badge badge-free">100% Free Certification</span>
+                        <h3>Python Programming & Data Structures</h3>
+                        <p class="instructor"><i class="fas fa-user-tie"></i> Mentor: Technical Core Team</p>
+                        <p class="desc">Master core syntax algorithms, object-oriented programming, data analytics libraries, and project-based engineering logic.</p>
                         <div class="course-footer">
-                            <span class="meta-info"><i class="fas fa-video"></i> 15+ Hours</span>
-                            <a href="#" class="btn btn-sm btn-enroll">Enroll Free</a>
+                            <span class="meta-info"><i class="fas fa-clock"></i> 15 Hours Modules</span>
+                            <button class="btn btn-sm btn-enroll" onclick="triggerEnrollmentModal('Python Programming & Data Structures', 'Online Self-Paced')">Enroll Now</button>
                         </div>
                     </div>
                 </div>
@@ -64,13 +84,13 @@
                 <div class="course-card free-card">
                     <div class="course-thumb" style="background-color: #eff6ff;"><i class="fas fa-laptop-code" style="color: #2563eb;"></i></div>
                     <div class="course-body">
-                        <span class="badge badge-free">100% Free</span>
-                        <h3>Frontend Web Design (HTML/CSS)</h3>
-                        <p class="instructor">Instructor: studonext Academy</p>
-                        <p class="desc">মডার্ন রেসপন্সিভ এবং ফ্লিপকার্ট-আমাজনের মতো প্রফেশনাল ওয়েব লেআউট ডিজাইন করা শিখুন।</p>
+                        <span class="badge badge-free">100% Free Certification</span>
+                        <h3>Modern Responsive Web Design (HTML/CSS)</h3>
+                        <p class="instructor"><i class="fas fa-user-tie"></i> Mentor: studonext Academy</p>
+                        <p class="desc">Build scalable, cross-device user interfaces utilizing Flexbox, CSS Grid engines, animation protocols, and modern UX standards.</p>
                         <div class="course-footer">
-                            <span class="meta-info"><i class="fas fa-video"></i> 10+ Hours</span>
-                            <a href="#" class="btn btn-sm btn-enroll">Enroll Free</a>
+                            <span class="meta-info"><i class="fas fa-clock"></i> 10 Hours Modules</span>
+                            <button class="btn btn-sm btn-enroll" onclick="triggerEnrollmentModal('Modern Responsive Web Design', 'Online Self-Paced')">Enroll Now</button>
                         </div>
                     </div>
                 </div>
@@ -80,15 +100,17 @@
 
         <hr class="section-divider">
 
+        <!-- Accredited Offline Regional Institutes -->
         <section class="course-section" style="margin-bottom: 5rem;">
             <div class="section-header-flex">
-                <h2 class="section-title"><i class="fas fa-map-marked-alt text-offline"></i> Nearby Offline Institutes & Training</h2>
+                <h2 class="section-title"><i class="fas fa-building-columns text-offline"></i> Accredited Regional Offline Training Institutes</h2>
                 <div class="location-select-box">
-                    <i class="fas fa-street-view"></i>
+                    <i class="fas fa-location-crosshairs"></i>
                     <select id="userLocationFilter">
-                        <option value="Howrah">Howrah (Udaynarayanpur / Amta)</option>
-                        <option value="Kolkata">Kolkata Center</option>
-                        <option value="Hooghly">Hooghly Local</option>
+                        <option value="All">All Locations</option>
+                        <option value="Howrah">Howrah Region</option>
+                        <option value="Kolkata">Kolkata Sector V</option>
+                        <option value="Hooghly">Hooghly District</option>
                     </select>
                 </div>
             </div>
@@ -98,14 +120,14 @@
                 <div class="course-card offline-card">
                     <div class="course-thumb" style="background-color: #fffbeb;"><i class="fas fa-calculator" style="color: #d97706;"></i></div>
                     <div class="course-body">
-                        <span class="badge badge-offline">Offline Center</span>
-                        <h3>Tally Prime with GST Professional Course</h3>
+                        <span class="badge badge-offline">Offline Training Center</span>
+                        <h3>Tally Prime with GST Professional Diploma</h3>
                         <p class="institute"><i class="fas fa-building"></i> Youth Computer Training Center (YCTC)</p>
-                        <p class="location"><i class="fas fa-map-marker-alt"></i> Local Center (Udaynarayanpur Branch)</p>
-                        <p class="desc">অফিশিয়াল অ্যাকাউন্টস, ট্যাক্সেশন এবং জিএসটি বিলিংয়ের কমপ্লিট অফলাইন প্র্যাক্টিক্যাল ক্লাস।</p>
+                        <p class="location"><i class="fas fa-location-dot"></i> Howrah Local Branch</p>
+                        <p class="desc">Comprehensive practical accounting, corporate taxation filing, GST compliance invoicing, and business ledger management.</p>
                         <div class="course-footer">
-                            <span class="meta-info"><i class="fas fa-calendar-alt"></i> 6 Months Course</span>
-                            <button class="btn btn-sm btn-view-center" onclick="alert('Center Details:\nAddress: Udaynarayanpur Bus Stand, Howrah\nPhone: +91 98765 12345\nTiming: Mon-Sat (10 AM - 5 PM)')">View Center</button>
+                            <span class="meta-info"><i class="fas fa-calendar-check"></i> 6 Months Duration</span>
+                            <button class="btn btn-sm btn-view-center" onclick="triggerEnrollmentModal('Tally Prime with GST', 'Youth Computer Training Center (YCTC)')">Request Seat</button>
                         </div>
                     </div>
                 </div>
@@ -113,14 +135,14 @@
                 <div class="course-card offline-card">
                     <div class="course-thumb" style="background-color: #faf5ff;"><i class="fas fa-palette" style="color: #7c3aed;"></i></div>
                     <div class="course-body">
-                        <span class="badge badge-offline">Offline Center</span>
-                        <h3>Advanced Photoshop & Graphics Design</h3>
+                        <span class="badge badge-offline">Offline Training Center</span>
+                        <h3>Advanced Graphic Design & Digital Media</h3>
                         <p class="institute"><i class="fas fa-building"></i> Media Tech Skills Academy</p>
-                        <p class="location"><i class="fas fa-map-marker-alt"></i> Amta / Howrah Center</p>
-                        <p class="desc">ব্যানার, ফ্লায়ার, থাম্বনেইল এবং অ্যাডভান্সড ফটো এডিটিং এর জন্য সম্পূর্ণ ল্যাব-বেসড ট্রেনিং।</p>
+                        <p class="location"><i class="fas fa-location-dot"></i> Amta / Howrah Campus</p>
+                        <p class="desc">Lab-based hands-on practical training covering vector illustrations, brand identity suites, Photoshop, and visual publishing.</p>
                         <div class="course-footer">
-                            <span class="meta-info"><i class="fas fa-calendar-alt"></i> 3 Months Training</span>
-                            <button class="btn btn-sm btn-view-center" onclick="alert('Center Details:\nAddress: Amta College Road, Howrah\nPhone: +91 90011 22334\nBatch Slot: Saturday & Sunday Specific')">View Center</button>
+                            <span class="meta-info"><i class="fas fa-calendar-check"></i> 3 Months BootCamp</span>
+                            <button class="btn btn-sm btn-view-center" onclick="triggerEnrollmentModal('Advanced Graphic Design', 'Media Tech Skills Academy')">Request Seat</button>
                         </div>
                     </div>
                 </div>
@@ -128,14 +150,14 @@
                 <div class="course-card offline-card">
                     <div class="course-thumb" style="background-color: #fff1f2;"><i class="fas fa-user-shield" style="color: #e11d48;"></i></div>
                     <div class="course-body">
-                        <span class="badge badge-offline">Offline Center</span>
-                        <h3>Hardware & Networking Cyber Security</h3>
+                        <span class="badge badge-offline">Offline Training Center</span>
+                        <h3>Cyber Security & Network Infrastructure</h3>
                         <p class="institute"><i class="fas fa-building"></i> Global Infotech Hub</p>
-                        <p class="location"><i class="fas fa-map-marker-alt"></i> Kolkata (Near Station)</p>
-                        <p class="desc">পিসি বিল্ডিং, কমান্ড প্রম্পট অপটিমাইজেশন এবং নেটওয়ার্কিং সিকিউরিটির অফলাইন বুটক্যাম্প।</p>
+                        <p class="location"><i class="fas fa-location-dot"></i> Salt Lake Sector V, Kolkata</p>
+                        <p class="desc">Hardware diagnostics, workstation assembly, command prompt terminal optimization, and enterprise network security protocols.</p>
                         <div class="course-footer">
-                            <span class="meta-info"><i class="fas fa-calendar-alt"></i> 1 Year Diploma</span>
-                            <button class="btn btn-sm btn-view-center" onclick="alert('Center Details:\nAddress: Salt Lake Sector V, Kolkata\nPhone: +91 80011 55667\nPlacement: 100% Placement Assistance Available')">View Center</button>
+                            <span class="meta-info"><i class="fas fa-calendar-check"></i> 1 Year Diploma</span>
+                            <button class="btn btn-sm btn-view-center" onclick="triggerEnrollmentModal('Cyber Security & Networking', 'Global Infotech Hub')">Request Seat</button>
                         </div>
                     </div>
                 </div>
@@ -144,5 +166,182 @@
         </section>
     </main>
 
+    <!-- Course Enrollment Modal Viewport -->
+    <div class="modal-overlay" id="courseEnrollModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeEnrollmentModal()"><i class="fas fa-times"></i></button>
+            <h3>Course Registration Request</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.2rem;">Complete your student credentials to lock your registration request.</p>
+            
+            <form id="courseEnrollmentForm" onsubmit="submitCourseEnrollment(event)">
+                <input type="hidden" id="targetCourseName" name="courseName">
+                <input type="hidden" id="targetInstitute" name="instituteName">
+
+                <div class="modal-form-group">
+                    <label>Selected Course Unit</label>
+                    <input type="text" id="displayCourseTitle" class="modal-input" style="background: #f1f5f9; font-weight: 600;" readonly>
+                </div>
+
+                <div class="modal-form-group">
+                    <label>Student Full Name</label>
+                    <input type="text" id="enrollStudentName" class="modal-input" placeholder="Enter full name" required>
+                </div>
+
+                <div class="modal-form-group">
+                    <label>Gmail / Email Address</label>
+                    <input type="email" id="enrollStudentEmail" class="modal-input" placeholder="name@gmail.com" required>
+                </div>
+
+                <div class="modal-form-group">
+                    <label>WhatsApp / Contact Number</label>
+                    <input type="tel" id="enrollStudentPhone" class="modal-input" placeholder="Enter 10-digit mobile number" required>
+                </div>
+
+                <button type="submit" class="btn-modal-submit" id="enrollSubmitBtn"><i class="fas fa-paper-plane"></i> Submit Registration</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Prompt Modal -->
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-content login-modal-content">
+            <div class="modal-header">
+                <h3>Access studonext</h3>
+                <button type="button" class="close-modal" onclick="closeLoginModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 2.5rem 2rem;">
+                <h4 style="margin-bottom: 0.5rem;">Welcome Back!</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Sign up or login using your authenticated Gmail Account.</p>
+                
+                <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-shape="pill"
+                         data-theme="outline"
+                         data-text="signin_with"
+                         data-size="large"
+                         data-logo_alignment="left">
+                    </div>
+                </div>
+
+                <div style="font-size: 0.8rem; color: var(--text-muted);">
+                    By continuing, you agree to studonext's Terms & Privacy Framework.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 studonext by Indrajit Samanta. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Google Script & System Core Logic Engine -->
+    <script>
+        const GOOGLE_AUTH_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUgJ-la2xeCeE8VcL2LuWd2OT_GiY7j-5c3UgseGqxAYjBbnKHOE7PgBhXMkRZ7Bfh/exec';
+
+        // 1. Mobile Menu Controller
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+        }
+
+        // 2. Login Check and Modal Management
+        function openLoginModal() { document.getElementById('loginModal').classList.remove('hidden'); }
+        function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); }
+
+        // Auto Populate Student Details if Logged In
+        window.addEventListener('load', () => {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const username = localStorage.getItem('username');
+            const userEmail = localStorage.getItem('userEmail');
+            const loginBtn = document.querySelector('.nav-login-btn');
+
+            if (isLoggedIn === 'true' && username && loginBtn) {
+                loginBtn.innerHTML = '<i class="fas fa-user-circle"></i> Profile';
+                loginBtn.onclick = () => { window.location.href = 'dashboard.html'; };
+            }
+
+            if (username) document.getElementById('enrollStudentName').value = username;
+            if (userEmail) document.getElementById('enrollStudentEmail').value = userEmail;
+        });
+
+        // 3. Trigger Enrollment Pipeline
+        function triggerEnrollmentModal(courseName, institute) {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                alert('Authentication required! Please login with your Gmail account to enroll.');
+                openLoginModal();
+                return;
+            }
+
+            document.getElementById('targetCourseName').value = courseName;
+            document.getElementById('targetInstitute').value = institute;
+            document.getElementById('displayCourseTitle').value = `${courseName} (${institute})`;
+            
+            document.getElementById('courseEnrollModal').classList.add('active');
+        }
+
+        function closeEnrollmentModal() {
+            document.getElementById('courseEnrollModal').classList.remove('active');
+        }
+
+        // 4. Submit Registration to Google Sheets & Sync with Student Dashboard
+        function submitCourseEnrollment(event) {
+            event.preventDefault();
+            const submitBtn = document.getElementById('enrollSubmitBtn');
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Request...';
+            submitBtn.disabled = true;
+
+            const courseName = document.getElementById('targetCourseName').value;
+            const institute = document.getElementById('targetInstitute').value;
+            const studentName = document.getElementById('enrollStudentName').value;
+            const studentEmail = document.getElementById('enrollStudentEmail').value;
+            const studentPhone = document.getElementById('enrollStudentPhone').value;
+
+            // Form Payload for Google Sheet Backend
+            let formData = new FormData();
+            formData.append('action', 'course_enrollment');
+            formData.append('CourseName', courseName);
+            formData.append('Institute', institute);
+            formData.append('StudentName', studentName);
+            formData.append('StudentEmail', studentEmail);
+            formData.append('StudentPhone', studentPhone);
+            formData.append('Timestamp', new Date().toLocaleString());
+
+            // Save to LocalStorage for Student Dashboard Sync
+            let userEnrollments = JSON.parse(localStorage.getItem('userEnrollments') || '[]');
+            userEnrollments.push({
+                title: courseName,
+                sub: institute,
+                status: 'Enrolled'
+            });
+            localStorage.setItem('userEnrollments', JSON.stringify(userEnrollments));
+
+            // Transmit Data to Google Sheets App Script Endpoint
+            fetch(GOOGLE_AUTH_SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert('Success! Your enrollment request has been registered and sent to the administrator database.');
+                closeEnrollmentModal();
+                window.location.href = 'dashboard.html';
+            })
+            .catch(err => {
+                console.error("Sheet Endpoint Pipeline Sync:", err);
+                alert('Registration recorded locally! Redirecting to Dashboard.');
+                closeEnrollmentModal();
+                window.location.href = 'dashboard.html';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Registration';
+                submitBtn.disabled = false;
+            });
+        }
+    </script>
 </body>
 </html>

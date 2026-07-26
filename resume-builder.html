@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudoNext | Advanced Professional Resume Builder</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>studonext | Advanced Multi-Template Resume Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     
     <style>
         :root {
@@ -18,398 +21,747 @@
             --text-muted: #64748b;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #f1f5f9; color: var(--text); padding: 0; }
-        
-        /* ==========================================================================
-           PREMIUM FIXED NAVIGATION HEADER (Matches other sub-pages)
-           ========================================================================== */
-        .header {
-            background-color: #ffffff;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-        }
-
-        .navbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
+        .builder-wrapper {
             max-width: 1400px;
-            margin: 0 auto;
+            margin: 2rem auto;
             padding: 0 1.5rem;
         }
 
-        .logo-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: var(--primary-light);
-        }
-
-        .page-badge {
-            font-size: 0.85rem;
-            font-weight: 600;
-            background: var(--gray-light);
-            color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 50px;
+        /* --- Template Selector Ribbon --- */
+        .template-selector-section {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
             border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
-        .nav-back-home {
-            text-decoration: none;
-            color: var(--text-muted);
+        .template-selector-section h2 {
+            font-size: 1.25rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .template-card {
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .template-card:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px rgba(59, 130, 246, 0.1);
+        }
+
+        .template-card.active {
+            border-color: var(--primary);
+            background-color: #eff6ff;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+        }
+
+        .template-card .preview-box {
+            height: 80px;
+            background: #f1f5f9;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #cbd5e1;
+            font-size: 0.8rem;
             font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .template-card h4 {
             font-size: 0.95rem;
+            color: var(--dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .template-card p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Main Layout Grid --- */
+        .builder-container { 
+            display: grid; 
+            grid-template-columns: 450px 1fr; 
+            gap: 2.5rem; 
+        }
+
+        .form-section { 
+            background: #ffffff; 
+            padding: 2rem; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); 
+            height: fit-content; 
+            border: 1px solid var(--border); 
+        }
+
+        .form-section h2 { 
+            font-size: 1.3rem; 
+            margin-bottom: 1.5rem; 
+            color: var(--dark); 
+            border-bottom: 2px solid var(--gray-light); 
+            padding-bottom: 0.6rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+
+        .form-section h3.sub-title {
+            font-size: 1rem;
+            color: var(--primary);
+            margin: 1.2rem 0 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.3rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: color 0.2s ease;
         }
 
-        .nav-back-home:hover {
-            color: var(--primary);
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
         }
 
-        /* Container adjustment for header offset */
-        .builder-container { 
-            display: grid; 
-            grid-template-columns: 430px 1fr; 
-            gap: 2.5rem; 
-            max-width: 1400px; 
-            margin: 2.5rem auto; 
-            padding: 0 1.5rem;
-        }
-
-        /* Input Form Panel Styling */
-        .form-section { background: #ffffff; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); height: fit-content; border: 1px solid var(--border); }
-        .form-section h2 { font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--dark); border-bottom: 2px solid var(--gray-light); padding-bottom: 0.6rem; display: flex; align-items: center; gap: 10px; }
-        .form-group { margin-bottom: 1.25rem; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
-        .form-group input, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 6px; outline: none; font-size: 0.95rem; transition: all 0.3s ease; background: #ffffff; }
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.82rem; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.65rem 0.85rem; border: 1px solid var(--border); border-radius: 6px; outline: none; font-size: 0.9rem; transition: all 0.3s ease; background: #ffffff; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); }
         
-        /* Dynamic Education Wrapper Row Block */
-        .education-input-item { background: var(--gray-light); border: 1px dashed var(--border); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; position: relative; }
-        .btn-add-more { background: #eff6ff; color: var(--primary); border: 1px dashed var(--primary-light); padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 600; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 1.5rem; width: 100%; justify-content: center; transition: all 0.2s; }
+        .education-input-item { background: var(--gray-light); border: 1px dashed var(--border); padding: 0.8rem; border-radius: 8px; margin-bottom: 0.8rem; position: relative; }
+        .btn-add-more { background: #eff6ff; color: var(--primary); border: 1px dashed var(--primary-light); padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 600; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 1rem; width: 100%; justify-content: center; transition: all 0.2s; }
         .btn-add-more:hover { background: var(--primary); color: white; }
-        .btn-remove-edu { background: #fee2e2; color: #ef4444; border: none; padding: 4px 8px; font-size: 0.75rem; font-weight: 600; border-radius: 4px; cursor: pointer; position: absolute; top: 10px; right: 10px; }
+        .btn-remove-edu { background: #fee2e2; color: #ef4444; border: none; padding: 3px 6px; font-size: 0.72rem; font-weight: 600; border-radius: 4px; cursor: pointer; position: absolute; top: 8px; right: 8px; }
 
         .btn-download { background-color: var(--primary); color: white; border: none; padding: 0.9rem 1.5rem; font-size: 1rem; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 1rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2); }
         .btn-download:hover { background-color: var(--primary-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); }
 
-        /* 📄 Ultimate A4 Preview Layout Engines */
         .preview-section { display: flex; flex-direction: column; align-items: center; }
-        .a4-page { width: 210mm; min-height: 297mm; background: #ffffff; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08); padding: 20mm; display: flex; flex-direction: column; gap: 1.8rem; position: relative; border: 1px solid var(--border); }
+        .a4-page { width: 210mm; min-height: 297mm; background: #ffffff; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08); padding: 20mm; position: relative; border: 1px solid var(--border); box-sizing: border-box; }
 
-        /* Corporate Layout Header Block */
-        .resume-header { display: flex; align-items: center; gap: 2.5rem; border-bottom: 3px solid var(--primary); padding-bottom: 1.8rem; }
-        .resume-photo-box { width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--gray-light); overflow: hidden; background-color: #f1f5f9; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .resume-photo-box img { width: 100%; height: 100%; object-fit: cover; }
-        .resume-photo-box i { font-size: 3.5rem; color: #cbd5e1; }
-        .header-info { flex-grow: 1; }
-        .header-info h1 { font-size: 2.4rem; color: var(--dark); text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 0.25rem; min-height: 40px; }
-        .header-info .title { font-size: 1.25rem; color: var(--primary-light); font-weight: 600; margin-bottom: 0.8rem; min-height: 25px; }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 1.5rem; font-size: 0.88rem; color: var(--text-muted); }
-        .contact-grid div { display: flex; align-items: center; gap: 8px; }
-        .contact-grid i { color: var(--primary); width: 14px; }
+        /* ==========================================================================
+           DYNAMIC TEMPLATE STYLES MATRIX
+           ========================================================================== */
 
-        /* Generic Section Architecture */
-        .resume-section { display: flex; flex-direction: column; gap: 0.6rem; }
-        .section-title { font-size: 1.15rem; color: var(--dark); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; font-weight: 700; }
-        .section-title i { color: var(--primary); font-size: 1.05rem; }
+        /* --- 1. MODERN CORPORATE --- */
+        .tpl-modern .resume-header { display: flex; align-items: center; gap: 2rem; border-bottom: 3px solid var(--primary); padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+        .tpl-modern .resume-photo-box { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--gray-light); overflow: hidden; background-color: #f1f5f9; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .tpl-modern .resume-photo-box img { width: 100%; height: 100%; object-fit: cover; }
+        .tpl-modern .resume-photo-box i { font-size: 3rem; color: #cbd5e1; }
+        .tpl-modern .header-info { flex-grow: 1; }
+        .tpl-modern .header-info h1 { font-size: 2.2rem; color: var(--dark); text-transform: uppercase; margin-bottom: 0.25rem; }
+        .tpl-modern .header-info .title { font-size: 1.15rem; color: var(--primary-light); font-weight: 600; margin-bottom: 0.8rem; }
+        .tpl-modern .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
 
-        .about-paragraph { font-size: 0.95rem; line-height: 1.6; text-align: justify; color: #334155; }
-        .skills-list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-        .skill-badge { background: var(--gray-light); border: 1px solid var(--border); padding: 0.35rem 0.85rem; border-radius: 4px; font-size: 0.85rem; font-weight: 500; color: var(--text); }
+        /* --- 2. CLASSIC BIO DATA (IMAGE 1) --- */
+        .tpl-classic-bio { font-family: 'Times New Roman', Times, serif; color: #000; }
+        .tpl-classic-bio .resume-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px double #000; padding-bottom: 1rem; margin-bottom: 1.5rem; }
+        .tpl-classic-bio .header-info h1 { font-size: 1.8rem; font-weight: bold; text-transform: uppercase; margin-bottom: 0.4rem; }
+        .tpl-classic-bio .resume-photo-box { width: 110px; height: 130px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; background: #fff; }
+        .tpl-classic-bio .resume-photo-box img { width: 100%; height: 100%; object-fit: cover; }
+        .tpl-classic-bio .resume-photo-box i { font-size: 3rem; color: #999; }
+        .tpl-classic-bio .bio-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.95rem; }
+        .tpl-classic-bio .bio-table td { padding: 4px 0; vertical-align: top; }
+        .tpl-classic-bio .bio-label { font-weight: bold; width: 160px; }
 
-        /* Multi Education Output Table View Style */
-        .edu-output-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 0.5rem 0; border-bottom: 1px dashed var(--border); }
+        /* --- 3. MODERN TABLE LAYOUT (IMAGE 2) --- */
+        .tpl-modern-table { font-family: 'Inter', sans-serif; }
+        .tpl-modern-table .banner-header { background-color: #4a4a4a; color: white; text-align: center; padding: 1.5rem; margin: -20mm -20mm 1.5rem -20mm; }
+        .tpl-modern-table .banner-header h1 { color: white; font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .tpl-modern-table .banner-header p { font-size: 0.9rem; color: #e2e8f0; }
+        .tpl-modern-table .top-info-flex { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+        .tpl-modern-table .resume-photo-box { width: 120px; height: 140px; border: 1px solid #4a4a4a; display: flex; align-items: center; justify-content: center; background: #f8fafc; }
+        .tpl-modern-table .resume-photo-box img { width: 100%; height: 100%; object-fit: cover; }
+        .tpl-modern-table .resume-photo-box i { font-size: 3rem; color: #94a3b8; }
+        .tpl-modern-table .edu-table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; }
+        .tpl-modern-table .edu-table th, .tpl-modern-table .edu-table td { border: 1px solid #666; padding: 8px 12px; text-align: center; font-size: 0.9rem; }
+        .tpl-modern-table .edu-table th { background-color: #555; color: white; font-weight: 600; }
+
+        /* --- 4. CREATIVE SIDEBAR (IMAGE 3) --- */
+        .tpl-creative-sidebar { padding: 0 !important; display: grid; grid-template-columns: 240px 1fr; min-height: 297mm; }
+        .tpl-creative-sidebar .sidebar-left { background-color: #22252a; color: white; padding: 2rem 1.2rem; }
+        .tpl-creative-sidebar .main-right { padding: 2.5rem 2rem; background: #fff; }
+        .tpl-creative-sidebar .resume-photo-box { width: 130px; height: 130px; border-radius: 50%; border: 3px solid #c0392b; margin: 0 auto 1.5rem auto; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #1a1d20; }
+        .tpl-creative-sidebar .resume-photo-box img { width: 100%; height: 100%; object-fit: cover; }
+        .tpl-creative-sidebar .resume-photo-box i { font-size: 3.5rem; color: #64748b; }
+        .tpl-creative-sidebar .side-block-title { background: #c0392b; color: white; padding: 6px 12px; font-weight: bold; font-size: 0.85rem; margin: 1.5rem 0 1rem 0; text-transform: uppercase; letter-spacing: 0.5px; }
+        .tpl-creative-sidebar .main-block-title { background: #c0392b; color: white; padding: 6px 12px; font-weight: bold; font-size: 1rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Shared Components */
+        .resume-section { margin-bottom: 1.2rem; }
+        .section-title { font-size: 1.1rem; color: var(--dark); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .section-title i { color: var(--primary); }
+        .about-paragraph { font-size: 0.92rem; line-height: 1.6; text-align: justify; color: #334155; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-badge { background: var(--gray-light); border: 1px solid var(--border); padding: 0.3rem 0.75rem; border-radius: 4px; font-size: 0.85rem; font-weight: 500; color: var(--text); }
+        .edu-output-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 0.4rem 0; border-bottom: 1px dashed var(--border); }
         .edu-output-item:last-child { border-bottom: none; }
-        .edu-meta h4 { font-size: 1rem; color: var(--dark); font-weight: 600; }
-        .edu-meta p { font-size: 0.88rem; color: var(--primary); font-weight: 500; }
-        .edu-year { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; }
 
-        /* 🖨️ Professional Print Optimization Archetype */
         @media print {
             body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; }
-            .header, .form-section, .btn-download { display: none !important; } /* প্রিন্টের সময় হেডারও হাইড হবে */
+            .header, .breaking-news-ticker, .template-selector-section, .form-section, .btn-download, .footer, .whatsapp-support-floating { display: none !important; }
+            .builder-wrapper { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
             .builder-container { display: block; margin: 0 !important; padding: 0 !important; }
             .a4-page { box-shadow: none !important; border: none !important; padding: 0 !important; margin: 0 !important; width: 210mm; height: 297mm; }
         }
+
         @media (max-width: 1150px) {
-            .builder-container { grid-template-columns: 1fr; margin: 1.5rem auto; }
+            .builder-container { grid-template-columns: 1fr; }
             .a4-page { width: 100%; min-height: auto; padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Navigation -->
     <header class="header">
-        <div class="navbar">
-            <div class="logo-group">
-                <a href="index.html" class="logo">studo<span>next</span></a>
-                <div class="page-badge">
-                    <i class="fa-solid fa-file-invoice"></i> Resume Builder
-                </div>
-            </div>
-            <a href="index.html" class="nav-back-home">
-                <i class="fa-solid fa-house-user"></i> Home
-            </a>
+        <div class="container navbar">
+            <a href="index.html" class="logo">studo<span>next</span></a>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+           <nav class="nav-menu" id="navMenu">
+    <a href="index.html" class="nav-link active">Home</a>
+    <a href="predictor.html" class="nav-link">College Predictor</a>
+    <a href="marketplace.html" class="nav-link">Book Marketplace</a>
+    <a href="courses.html" class="nav-link">Courses</a>
+    <a href="suggestions.html" class="nav-link">Exam Suggestions</a>
+    <a href="resume-builder.html" class="nav-link">Resume Builder</a>
+    <a href="news.html" class="nav-link">News</a>
+    <a href="admin.html" class="nav-admin-link">Admin Login</a>
+    <button class="btn btn-sm btn-primary nav-login-btn" onclick="openLoginModal()">Login / Sign Up</button>
+</nav>
         </div>
     </header>
 
-<div class="builder-container">
-    
-    <div class="form-section">
-        <h2><i class="fa-solid fa-file-pen" style="color: var(--primary);"></i> Control Panel</h2>
-        
-        <div class="form-group">
-            <label><i class="fa-solid fa-image"></i> Profile Picture</label>
-            <input type="file" id="inputPhoto" accept="image/*">
+    <!-- News Ticker -->
+    <div class="breaking-news-ticker">
+        <div class="ticker-title">
+            <i class="fas fa-bell animate-bell"></i> LATEST ALERTS
         </div>
-
-        <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="inputName" placeholder="Enter Full Name (e.g. Indrajit Samanta)">
-        </div>
-        
-        <div class="form-group">
-            <label>Professional Title</label>
-            <input type="text" id="inputTitle" placeholder="e.g. Full Stack Web Developer">
-        </div>
-
-        <div class="form-group">
-            <label>Mobile Number</label>
-            <input type="text" id="inputPhone" placeholder="e.g. +91 78722 52866">
-        </div>
-
-        <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="inputEmail" placeholder="e.g. contact@studonext.com">
-        </div>
-
-        <div class="form-group">
-            <label>Location / Address</label>
-            <input type="text" id="inputAddress" placeholder="e.g. Howrah, West Bengal, India">
-        </div>
-
-        <div class="form-group">
-            <label>Core Skills (Comma Separated)</label>
-            <input type="text" id="inputSkills" placeholder="e.g. WordPress, HTML5, CSS3, SEO">
-        </div>
-
-        <div class="form-group">
-            <label style="margin-bottom: 0.8rem; color: var(--primary);">Education Qualifications</label>
-            <div id="educationInputsContainer">
-                <div class="education-input-item">
-                    <input type="text" class="edu-degree" placeholder="Degree Name (e.g. Diploma in CST)" style="margin-bottom: 0.5rem;" oninput="syncEducationGrid()">
-                    <input type="text" class="edu-inst" placeholder="College / Board Name" style="margin-bottom: 0.5rem;" oninput="syncEducationGrid()">
-                    <input type="text" class="edu-year" placeholder="Passing Year (e.g. 2024)" oninput="syncEducationGrid()">
-                </div>
+        <div class="ticker-content-wrap">
+            <div class="ticker-text-move">
+                <span>🔥 SVMCM Scholarship 2026 Fresh & Renewal Application Started. Check your eligibility now!</span>
+                <span>🎓 Oasis and National Scholarship Portal (NSP) last date extended till next month.</span>
+                <span>💼 Multi-Template Resume Builder tool is now live! Choose layout & create corporate CV for free.</span>
             </div>
-            <button type="button" class="btn-add-more" onclick="addNewEducationRow()">
-                <i class="fa-solid fa-circle-plus"></i> Add More Education Row
-            </button>
         </div>
-
-        <button class="btn-download" onclick="window.print()">
-            <i class="fa-solid fa-cloud-arrow-down"></i> Export Professional A4 PDF
-        </button>
     </div>
 
-    <div class="preview-section">
-        <div class="a4-page" id="resumePage">
+    <!-- Main Builder Wrapper -->
+    <div class="builder-wrapper">
+
+        <!-- Template Selector Ribbon -->
+        <section class="template-selector-section">
+            <h2><i class="fa-solid fa-palette" style="color: var(--primary);"></i> Choose Resume Template Format</h2>
+            <div class="template-grid">
+                
+                <div class="template-card active" onclick="switchTemplate('tpl-modern', this)">
+                    <div class="preview-box">Modern Corporate</div>
+                    <h4>Modern Corporate</h4>
+                    <p>Clean top photo & accent header</p>
+                </div>
+
+                <div class="template-card" onclick="switchTemplate('tpl-classic-bio', this)">
+                    <div class="preview-box">Classic Bio-Data</div>
+                    <h4>Classic Bio-Data</h4>
+                    <p>Serif font with photo top-right</p>
+                </div>
+
+                <div class="template-card" onclick="switchTemplate('tpl-modern-table', this)">
+                    <div class="preview-box">Modern Table</div>
+                    <h4>Modern Table View</h4>
+                    <p>Dark banner with tabular degrees</p>
+                </div>
+
+                <div class="template-card" onclick="switchTemplate('tpl-creative-sidebar', this)">
+                    <div class="preview-box">Creative Sidebar</div>
+                    <h4>Creative Sidebar</h4>
+                    <p>Dark two-column modern format</p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="builder-container">
             
-            <div class="resume-header">
-                <div class="resume-photo-box" id="photoPreview">
-                    <i class="fa-solid fa-user"></i>
+            <!-- Left Input Form Panel -->
+            <div class="form-section">
+                <h2><i class="fa-solid fa-file-pen" style="color: var(--primary);"></i> Enter Student Details</h2>
+                
+                <h3 class="sub-title"><i class="fa-solid fa-user"></i> Basic Information</h3>
+                
+                <div class="form-group">
+                    <label><i class="fa-solid fa-image"></i> Profile Photo</label>
+                    <input type="file" id="inputPhoto" accept="image/*">
                 </div>
-                <div class="header-info">
-                    <h1 id="viewName">Your Name</h1>
-                    <div class="title" id="viewTitle">Professional Designation Placement</div>
-                    <div class="contact-grid">
-                        <div><i class="fa-solid fa-phone"></i> <span id="viewPhone">Phone Number</span></div>
-                        <div><i class="fa-solid fa-envelope"></i> <span id="viewEmail">Email Address</span></div>
-                        <div><i class="fa-solid fa-location-dot"></i> <span id="viewAddress">Location Structure</span></div>
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="inputName" placeholder="e.g. INDRAJIT SAMANTA">
+                </div>
+                
+                <div class="form-group">
+                    <label>Professional Designation / Title</label>
+                    <input type="text" id="inputTitle" placeholder="e.g. Software Developer / Sales Executive">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="text" id="inputPhone" placeholder="e.g. +91 98765 43210">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="inputEmail" placeholder="e.g. student@email.com">
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label>Location / Address</label>
+                    <input type="text" id="inputAddress" placeholder="e.g. Kolkata, West Bengal, India">
+                </div>
+
+                <h3 class="sub-title"><i class="fa-solid fa-id-card"></i> Personal Bio-Data</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="text" id="inputDob" placeholder="e.g. 12 June 2000">
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="inputGender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Father's Name</label>
+                        <input type="text" id="inputFather" placeholder="e.g. Anthony D'Souza">
+                    </div>
+                    <div class="form-group">
+                        <label>Languages Known</label>
+                        <input type="text" id="inputLang" placeholder="e.g. English, Bengali, Hindi">
+                    </div>
+                </div>
+
+                <h3 class="sub-title"><i class="fa-solid fa-graduation-cap"></i> Academic Qualifications</h3>
+
+                <div class="form-group">
+                    <div id="educationInputsContainer">
+                        <div class="education-input-item">
+                            <input type="text" class="edu-degree" placeholder="Degree / Exam Name (e.g. B.Tech / Diploma)" style="margin-bottom: 0.4rem;" oninput="renderResume()">
+                            <input type="text" class="edu-inst" placeholder="College / Board / School Name" style="margin-bottom: 0.4rem;" oninput="renderResume()">
+                            <div class="form-row">
+                                <input type="text" class="edu-year" placeholder="Passing Year (e.g. 2024)" oninput="renderResume()">
+                                <input type="text" class="edu-marks" placeholder="Marks / CGPA / % (e.g. 85% / 8.5 CGPA)" oninput="renderResume()">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-add-more" onclick="addNewEducationRow()">
+                        <i class="fa-solid fa-circle-plus"></i> Add More Education Row
+                    </button>
+                </div>
+
+                <h3 class="sub-title"><i class="fa-solid fa-gears"></i> Skills & Experience</h3>
+
+                <div class="form-group">
+                    <label>Core Skills (Comma Separated)</label>
+                    <input type="text" id="inputSkills" placeholder="e.g. MS Office, C++, Python, Communication">
+                </div>
+
+                <div class="form-group">
+                    <label>Work Experience / Projects (Optional)</label>
+                    <textarea id="inputExp" rows="3" placeholder="e.g. Completed Internship at ABC Tech | Managed client relations..." oninput="renderResume()"></textarea>
+                </div>
+
+                <button class="btn-download" onclick="window.print()">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Export / Print A4 PDF
+                </button>
             </div>
 
-            <div class="resume-section">
-                <div class="section-title"><i class="fa-solid fa-user-tie"></i> Executive Summary</div>
-                <p class="about-paragraph" id="viewAbout">
-                    The generated professional summary statement grid will dynamically appear here once you fill out your Designation and Technical Skills fields.
-                </p>
-            </div>
-
-            <div class="resume-section">
-                <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> Education Architecture</div>
-                <div id="viewEducationOutputList" style="display: flex; flex-direction: column; gap: 0.8rem;"></div>
-            </div>
-
-            <div class="resume-section">
-                <div class="section-title"><i class="fa-solid fa-gears"></i> Technical Expertise</div>
-                <div class="skills-list" id="viewSkills"></div>
+            <!-- Right Live A4 Resume Preview Panel -->
+            <div class="preview-section">
+                <div class="a4-page tpl-modern" id="resumePage">
+                    <!-- Dynamic Content Rendered via JS -->
+                </div>
             </div>
 
         </div>
     </div>
 
-</div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">studo<span>next</span></a>
+                <p>Building the modern ecosystem for structural educational progress and multi-disciplinary career progression pipelines.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/7872252866" target="_blank" rel="noopener noreferrer" style="background-color: #25d366;"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.youtube.com/@Indrajitsvlogs01" target="_blank" rel="noopener noreferrer" style="background-color: #ff0000;"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Explorations</h4>
+                <a href="predictor.html">College Predictor</a>
+                <a href="marketplace.html">Book Marketplace</a>
+                <a href="courses.html">Courses Hub</a>
+            </div>
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="support.html">Contact Support</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 studonext by Indrajit Samanta. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-<script>
-    const inputPhoto = document.getElementById('inputPhoto');
-    const photoPreview = document.getElementById('photoPreview');
-    const inputName = document.getElementById('inputName');
-    const viewName = document.getElementById('viewName');
-    const inputTitle = document.getElementById('inputTitle');
-    const viewTitle = document.getElementById('viewTitle');
-    const inputPhone = document.getElementById('inputPhone');
-    const viewPhone = document.getElementById('viewPhone');
-    const inputEmail = document.getElementById('inputEmail');
-    const viewEmail = document.getElementById('viewEmail');
-    const inputAddress = document.getElementById('inputAddress');
-    const viewAddress = document.getElementById('viewAddress');
-    const inputSkills = document.getElementById('inputSkills');
-    const viewSkills = document.getElementById('viewSkills');
-    const viewAbout = document.getElementById('viewAbout');
-    const educationInputsContainer = document.getElementById('educationInputsContainer');
-    const viewEducationOutputList = document.getElementById('viewEducationOutputList');
+    <!-- Floating WhatsApp Support Button -->
+    <a href="https://wa.me/917872252866?text=Hello%20StudoNext%20Support,%20I%20need%20help%20with%20Resume%20Builder..." 
+       class="whatsapp-support-floating" 
+       target="_blank" 
+       title="Contact Student Support">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    // Photo Byte Stream Engine Processing Matrix
-    inputPhoto.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                photoPreview.innerHTML = `<img src="${event.target.result}" alt="Profile Photo">`;
-            }
-            reader.readAsDataURL(file);
-        }
-    });
+    <!-- JavaScript Engine -->
+    <script>
+        let currentTemplate = 'tpl-modern';
+        let userPhotoUrl = '';
 
-    // Dynamic Multi-Education Field Adding Engine
-    function addNewEducationRow() {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'education-input-item';
-        itemDiv.innerHTML = `
-            <button type="button" class="btn-remove-edu" onclick="removeEducationRow(this)">Remove</button>
-            <input type="text" class="edu-degree" placeholder="Degree Name (e.g. Secondary / 10th)" style="margin-bottom: 0.5rem;" oninput="syncEducationGrid()">
-            <input type="text" class="edu-inst" placeholder="School / Board Name" style="margin-bottom: 0.5rem;" oninput="syncEducationGrid()">
-            <input type="text" class="edu-year" placeholder="Passing Year (e.g. 2022)" oninput="syncEducationGrid()">
-        `;
-        educationInputsContainer.appendChild(itemDiv);
-        syncEducationGrid();
-    }
-
-    function removeEducationRow(button) {
-        button.parentElement.remove();
-        syncEducationGrid();
-    }
-
-    // Synchronize Input Fields with A4 Output Panel Real-Time
-    function syncEducationGrid() {
-        const degrees = document.querySelectorAll('.edu-degree');
-        const institutes = document.querySelectorAll('.edu-inst');
-        const years = document.querySelectorAll('.edu-year');
-
-        viewEducationOutputList.innerHTML = '';
-        let hasData = false;
-
-        for(let i=0; i < degrees.length; i++) {
-            const degVal = degrees[i].value.trim();
-            const instVal = institutes[i].value.trim();
-            const yearVal = years[i].value.trim();
-
-            if(degVal || instVal || yearVal) {
-                hasData = true;
-                const outputHtml = `
-                    <div class="edu-output-item">
-                        <div class="edu-meta">
-                            <h4>${degVal || 'Degree Title'}</h4>
-                            <p>${instVal || 'Institution Name'}</p>
-                        </div>
-                        <div class="edu-year">${yearVal || 'Year'}</div>
-                    </div>
-                `;
-                viewEducationOutputList.insertAdjacentHTML('beforeend', outputHtml);
-            }
+        // Mobile Nav Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => { navMenu.classList.toggle('active'); });
         }
 
-        if(!hasData) {
-            viewEducationOutputList.innerHTML = '<p style="color:var(--text-muted); font-size:0.9rem;">No educational logs recorded yet.</p>';
-        }
-    }
-
-    // Programmatic Corporate Summary Sentence Mixer (The Auto About-Me Engine)
-    function compileExecutiveSummary() {
-        const title = inputTitle.value.trim() || 'professional';
-        const skills = inputSkills.value.trim();
-
-        let executiveParagraph = "";
-        
-        if(skills) {
-            executiveParagraph = `Results-driven and highly motivated ${title} with a solid baseline in structural system development. Possesses proven technical expertise in core modules including ${skills}. Recognized for a strong analytical mindset and a continuous learning trajectory, dedicated to deploying optimized scalability and engineering excellence within collaborative organizational structures.`;
-        } else {
-            executiveParagraph = `Ambitious and goal-oriented ${title} committed to high-performance operational metrics. Adept at cross-functional problem solving and executing innovative technical workflows to accelerate production lifecycles and business progression grids.`;
-        }
-        
-        viewAbout.innerText = executiveParagraph;
-    }
-
-    // Dynamic Skill Badges Node Generator
-    function processSkillsGrid() {
-        const skillsValue = inputSkills.value.trim();
-        viewSkills.innerHTML = '';
-        
-        if(!skillsValue) return;
-
-        const skillsArray = skillsValue.split(',');
-        skillsArray.forEach(skill => {
-            if(skill.trim() !== '') {
-                const badge = document.createElement('span');
-                badge.className = 'skill-badge';
-                badge.innerText = skill.trim();
-                viewSkills.appendChild(badge);
+        // Image Reader
+        document.getElementById('inputPhoto').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    userPhotoUrl = event.target.result;
+                    renderResume();
+                }
+                reader.readAsDataURL(file);
             }
         });
-    }
 
-    // Event Matrix Pipeline Mapping
-    inputName.addEventListener('input', (e) => { viewName.innerText = e.target.value.trim() || 'Your Name'; });
-    inputTitle.addEventListener('input', (e) => { viewTitle.innerText = e.target.value.trim() || 'Professional Designation Placement'; compileExecutiveSummary(); });
-    inputPhone.addEventListener('input', (e) => { viewPhone.innerText = e.target.value.trim() || 'Phone Number'; });
-    inputEmail.addEventListener('input', (e) => { viewEmail.innerText = e.target.value.trim() || 'Email Address'; });
-    inputAddress.addEventListener('input', (e) => { viewAddress.innerText = e.target.value.trim() || 'Location Structure'; });
-    
-    inputSkills.addEventListener('input', () => {
-        processSkillsGrid();
-        compileExecutiveSummary();
-    });
+        // Dynamic Education Field Addition
+        function addNewEducationRow() {
+            const container = document.getElementById('educationInputsContainer');
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'education-input-item';
+            itemDiv.innerHTML = `
+                <button type="button" class="btn-remove-edu" onclick="removeEducationRow(this)">Remove</button>
+                <input type="text" class="edu-degree" placeholder="Degree / Exam Name" style="margin-bottom: 0.4rem;" oninput="renderResume()">
+                <input type="text" class="edu-inst" placeholder="College / Board Name" style="margin-bottom: 0.4rem;" oninput="renderResume()">
+                <div class="form-row">
+                    <input type="text" class="edu-year" placeholder="Passing Year" oninput="renderResume()">
+                    <input type="text" class="edu-marks" placeholder="Marks / CGPA / %" oninput="renderResume()">
+                </div>
+            `;
+            container.appendChild(itemDiv);
+            renderResume();
+        }
 
-    // Initial Execution Matrix on Load
-    syncEducationGrid();
-    compileExecutiveSummary();
-</script>
+        function removeEducationRow(button) {
+            button.parentElement.remove();
+            renderResume();
+        }
 
+        // Switch Template Function
+        function switchTemplate(templateClass, cardElement) {
+            currentTemplate = templateClass;
+            document.querySelectorAll('.template-card').forEach(card => card.classList.remove('active'));
+            cardElement.classList.add('active');
+            
+            const page = document.getElementById('resumePage');
+            page.className = 'a4-page ' + templateClass;
+            renderResume();
+        }
+
+        // Master Render Function
+        function renderResume() {
+            const name = document.getElementById('inputName').value.trim() || 'INDRAJIT \'SAMANTA';
+            const title = document.getElementById('inputTitle').value.trim() || 'Professional Designation';
+            const phone = document.getElementById('inputPhone').value.trim() || '+91 98765 43210';
+            const email = document.getElementById('inputEmail').value.trim() || 'student@email.com';
+            const address = document.getElementById('inputAddress').value.trim() || 'Kolkata, West Bengal, India';
+            const dob = document.getElementById('inputDob').value.trim() || '12 June 2000';
+            const gender = document.getElementById('inputGender').value;
+            const father = document.getElementById('inputFather').value.trim() || 'Father\'s Name';
+            const lang = document.getElementById('inputLang').value.trim() || 'English, Hindi, Bengali';
+            const exp = document.getElementById('inputExp').value.trim();
+
+            const skillsRaw = document.getElementById('inputSkills').value.trim();
+            const skillsArr = skillsRaw ? skillsRaw.split(',') : ['Web Development', 'Problem Solving', 'Communication'];
+
+            // Gather Education Data
+            const degrees = document.querySelectorAll('.edu-degree');
+            const institutes = document.querySelectorAll('.edu-inst');
+            const years = document.querySelectorAll('.edu-year');
+            const marks = document.querySelectorAll('.edu-marks');
+            const eduList = [];
+            
+            for(let i=0; i<degrees.length; i++) {
+                const d = degrees[i].value.trim();
+                const inst = institutes[i].value.trim();
+                const y = years[i].value.trim();
+                const m = marks[i].value.trim();
+                if(d || inst || y || m) {
+                    eduList.push({ degree: d || 'Degree Name', inst: inst || 'College / Board Name', year: y || '2024', mark: m || 'N/A' });
+                }
+            }
+            if(eduList.length === 0) {
+                eduList.push({ degree: 'Bachelor of Business Administration', inst: 'St. Xavier\'s College', year: '2023', mark: '8.5 CGPA' });
+                eduList.push({ degree: 'Higher Secondary (HSSC)', inst: 'Mount Carmel College', year: '2020', mark: '87%' });
+            }
+
+            const photoHtml = userPhotoUrl 
+                ? `<img src="${userPhotoUrl}" alt="Photo">` 
+                : `<i class="fa-solid fa-user"></i>`;
+
+            const summaryText = `Dedicated and detail-oriented ${title} driven to achieve excellence. Possesses foundational expertise in ${skillsArr.join(', ')}. Strong capability to work in fast-paced collaborative environments and deliver quantitative outcomes.`;
+
+            const page = document.getElementById('resumePage');
+
+            // --- RENDER BASED ON TEMPLATE ---
+            if(currentTemplate === 'tpl-modern') {
+                page.innerHTML = `
+                    <div class="resume-header">
+                        <div class="resume-photo-box">${photoHtml}</div>
+                        <div class="header-info">
+                            <h1>${name}</h1>
+                            <div class="title">${title}</div>
+                            <div class="contact-grid">
+                                <div><i class="fa-solid fa-phone"></i> ${phone}</div>
+                                <div><i class="fa-solid fa-envelope"></i> ${email}</div>
+                                <div><i class="fa-solid fa-location-dot"></i> ${address}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resume-section">
+                        <div class="section-title"><i class="fa-solid fa-user-tie"></i> Executive Summary</div>
+                        <p class="about-paragraph">${summaryText}</p>
+                    </div>
+                    <div class="resume-section">
+                        <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> Educational Qualifications</div>
+                        ${eduList.map(e => `
+                            <div class="edu-output-item">
+                                <div>
+                                    <h4 style="font-size:0.95rem; font-weight:600;">${e.degree}</h4>
+                                    <p style="font-size:0.85rem; color:var(--primary);">${e.inst}</p>
+                                </div>
+                                <div style="text-align:right;">
+                                    <div style="font-size:0.85rem; color:var(--dark); font-weight:700;">${e.mark}</div>
+                                    <div style="font-size:0.8rem; color:var(--text-muted);">${e.year}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${exp ? `
+                    <div class="resume-section">
+                        <div class="section-title"><i class="fa-solid fa-briefcase"></i> Experience / Projects</div>
+                        <p class="about-paragraph">${exp}</p>
+                    </div>` : ''}
+                    <div class="resume-section">
+                        <div class="section-title"><i class="fa-solid fa-gears"></i> Technical Skills</div>
+                        <div class="skills-list">
+                            ${skillsArr.map(s => `<span class="skill-badge">${s.trim()}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            } 
+            else if(currentTemplate === 'tpl-classic-bio') {
+                page.innerHTML = `
+                    <div class="resume-header">
+                        <div class="header-info">
+                            <h2 style="font-size: 1.2rem; text-decoration: underline; margin-bottom: 0.5rem;">RESUME</h2>
+                            <h1>${name}</h1>
+                            <p>${address}</p>
+                            <p>Cell #: ${phone}</p>
+                            <p>${email}</p>
+                        </div>
+                        <div class="resume-photo-box">${photoHtml}</div>
+                    </div>
+                    <div class="resume-section">
+                        <h3 style="text-decoration: underline; font-size: 1.1rem; margin-bottom: 0.6rem;">PERSONAL DATA</h3>
+                        <table class="bio-table">
+                            <tr><td class="bio-label">Date of Birth</td><td>: ${dob}</td></tr>
+                            <tr><td class="bio-label">Gender</td><td>: ${gender}</td></tr>
+                            <tr><td class="bio-label">Father's Name</td><td>: ${father}</td></tr>
+                            <tr><td class="bio-label">Address</td><td>: ${address}</td></tr>
+                            <tr><td class="bio-label">Contact Number</td><td>: ${phone}</td></tr>
+                            <tr><td class="bio-label">Email Address</td><td>: ${email}</td></tr>
+                            <tr><td class="bio-label">Languages Known</td><td>: ${lang}</td></tr>
+                        </table>
+                    </div>
+                    <div class="resume-section">
+                        <h3 style="text-decoration: underline; font-size: 1.1rem; margin-bottom: 0.6rem;">EDUCATIONAL QUALIFICATIONS</h3>
+                        ${eduList.map(e => `
+                            <div style="margin-bottom:0.8rem; font-size:0.95rem;">
+                                <strong>${e.degree}</strong> - (${e.mark})<br>
+                                ${e.inst}<br>
+                                Year of Passing: ${e.year}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="resume-section">
+                        <h3 style="text-decoration: underline; font-size: 1.1rem; margin-bottom: 0.6rem;">SKILLS & INTERESTS</h3>
+                        <ul style="padding-left: 1.2rem; font-size: 0.95rem;">
+                            ${skillsArr.map(s => `<li style="margin-bottom:0.3rem;">* ${s.trim()}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            else if(currentTemplate === 'tpl-modern-table') {
+                page.innerHTML = `
+                    <div class="banner-header">
+                        <h1>${name}</h1>
+                        <p>Phone: ${phone} | Email: ${email}</p>
+                    </div>
+                    <div class="top-info-flex">
+                        <div style="font-size:0.9rem; line-height:1.7;">
+                            <p><strong>Date of Birth:</strong> ${dob}</p>
+                            <p><strong>Gender:</strong> ${gender}</p>
+                            <p><strong>Father's Name:</strong> ${father}</p>
+                            <p><strong>Address:</strong> ${address}</p>
+                            <p><strong>Languages Known:</strong> ${lang}</p>
+                        </div>
+                        <div class="resume-photo-box">${photoHtml}</div>
+                    </div>
+                    <div class="resume-section">
+                        <h3 style="border-bottom: 2px solid #4a4a4a; padding-bottom: 0.3rem; margin-bottom:0.6rem;">Educational Qualifications</h3>
+                        <table class="edu-table">
+                            <thead>
+                                <tr>
+                                    <th>Degree / Course</th>
+                                    <th>Institution / Board</th>
+                                    <th>Year of Pass</th>
+                                    <th>Marks / CGPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${eduList.map(e => `
+                                    <tr>
+                                        <td>${e.degree}</td>
+                                        <td>${e.inst}</td>
+                                        <td>${e.year}</td>
+                                        <td><strong>${e.mark}</strong></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ${exp ? `
+                    <div class="resume-section" style="margin-top:1.2rem;">
+                        <h3 style="border-bottom: 2px solid #4a4a4a; padding-bottom: 0.3rem; margin-bottom:0.6rem;">Work Experience</h3>
+                        <p style="font-size:0.9rem; line-height:1.6;">${exp}</p>
+                    </div>` : ''}
+                    <div class="resume-section" style="margin-top:1.2rem;">
+                        <h3 style="border-bottom: 2px solid #4a4a4a; padding-bottom: 0.3rem; margin-bottom:0.6rem;">Skills</h3>
+                        <ul style="padding-left: 1.2rem; font-size:0.9rem;">
+                            ${skillsArr.map(s => `<li style="margin-bottom:0.3rem;">${s.trim()}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            else if(currentTemplate === 'tpl-creative-sidebar') {
+                page.innerHTML = `
+                    <div class="sidebar-left">
+                        <div class="resume-photo-box">${photoHtml}</div>
+                        
+                        <div class="side-block-title">CONTACT</div>
+                        <p style="font-size: 0.8rem; margin-bottom: 0.5rem; word-break: break-all;"><i class="fa-solid fa-phone"></i> ${phone}</p>
+                        <p style="font-size: 0.8rem; margin-bottom: 0.5rem; word-break: break-all;"><i class="fa-solid fa-envelope"></i> ${email}</p>
+                        <p style="font-size: 0.8rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-location-dot"></i> ${address}</p>
+
+                        <div class="side-block-title">PERSONAL DETAILS</div>
+                        <p style="font-size: 0.78rem; margin-bottom: 0.3rem;"><strong>DOB:</strong> ${dob}</p>
+                        <p style="font-size: 0.78rem; margin-bottom: 0.3rem;"><strong>Gender:</strong> ${gender}</p>
+                        <p style="font-size: 0.78rem; margin-bottom: 0.3rem;"><strong>Languages:</strong> ${lang}</p>
+
+                        <div class="side-block-title">SKILLS</div>
+                        <ul style="padding-left: 1rem; font-size: 0.8rem; line-height: 1.6;">
+                            ${skillsArr.map(s => `<li>${s.trim()}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="main-right">
+                        <h1 style="font-size: 2.2rem; color: #c0392b; text-transform: uppercase; font-weight:700; line-height:1.1;">${name}</h1>
+                        <h3 style="font-size: 1rem; letter-spacing: 1px; margin-bottom: 1.5rem; color: #333; text-transform:uppercase;">${title}</h3>
+
+                        <div class="main-block-title">EXECUTIVE SUMMARY</div>
+                        <p class="about-paragraph" style="margin-bottom: 1.5rem;">${summaryText}</p>
+
+                        <div class="main-block-title">EDUCATION</div>
+                        ${eduList.map(e => `
+                            <div style="margin-bottom: 1rem; display:flex; justify-content:space-between; align-items:flex-start;">
+                                <div>
+                                    <h4 style="font-size: 0.95rem; font-weight:700; color:#111;">${e.degree}</h4>
+                                    <p style="font-size: 0.85rem; color:#c0392b;">${e.inst}</p>
+                                </div>
+                                <div style="text-align:right;">
+                                    <span style="font-size: 0.85rem; font-weight:700; color:#111;">${e.mark}</span><br>
+                                    <span style="font-size: 0.78rem; color:#666;">${e.year}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+
+                        ${exp ? `
+                        <div class="main-block-title" style="margin-top:1.5rem;">EXPERIENCE / PROJECTS</div>
+                        <p class="about-paragraph">${exp}</p>
+                        ` : ''}
+                    </div>
+                `;
+            }
+        }
+
+        // Live Binding Listeners
+        ['inputName', 'inputTitle', 'inputPhone', 'inputEmail', 'inputAddress', 'inputDob', 'inputGender', 'inputFather', 'inputLang', 'inputSkills', 'inputExp'].forEach(id => {
+            const el = document.getElementById(id);
+            if(el) {
+                el.addEventListener('input', renderResume);
+                el.addEventListener('change', renderResume);
+            }
+        });
+
+        // Initial Execution
+        renderResume();
+    </script>
 </body>
 </html>

@@ -1,209 +1,298 @@
+/* ==========================================================================
+   STUDONEXT AI COLLEGE PREDICTOR - ENHANCED SPECIFICATION STYLESHEET
+   ========================================================================== */
+
 :root {
-    --primary-blue: #0066cc;
-    --light-bg: #f4f6f9;
+    --primary-blue: #1e40af;
+    --primary-light: #3b82f6;
+    --secondary-dark: #0f172a;
+    --background-base: #f8fafc;
     --card-bg: #ffffff;
-    --text-dark: #333333;
-    --border-color: #cccccc;
-    --success-green: #00cc66;
+    --border-color: #e2e8f0;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --success-green: #10b981;
+    --success-hover: #059669;
+    --accent-amber: #d97706;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light-bg);
-    margin: 0;
-    padding: 0;
-    color: var(--text-dark);
+    background-color: var(--background-base);
+    color: var(--text-main);
+    line-height: 1.6;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--card-bg);
-    padding: 15px 40px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+.predictor-container {
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    padding: 0 1.5rem;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--primary-blue);
-}
-
-.logo span {
-    background-color: var(--primary-blue);
-    color: white;
-    padding: 2px 8px;
-    font-size: 14px;
-    border-radius: 4px;
-    margin-left: 5px;
-}
-
-.hero-banner {
-    background-color: var(--primary-blue);
-    color: white;
+.page-hero {
     text-align: center;
-    padding: 40px 20px;
-    margin: 25px 40px;
-    border-radius: 12px;
+    margin-bottom: 2.5rem;
 }
 
-.hero-banner h1 {
-    margin: 0 0 10px 0;
-    font-size: 32px;
+.page-hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--secondary-dark);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
 }
 
-.container {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 30px;
-    padding: 0 40px 40px 40px;
+.page-hero p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 750px;
+    margin: 0 auto;
 }
 
-.sidebar-card, .form-container {
+/* Predictor Control Form Card */
+.predictor-card {
     background: var(--card-bg);
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    height: fit-content;
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04);
+    margin-bottom: 2.5rem;
 }
 
-.form-container {
-    max-width: 500px;
-    width: 100%;
-    margin: 40px auto;
-}
-
-h2, h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--light-bg);
-    padding-bottom: 10px;
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.form-group select, .form-group input {
-    width: 100%;
-    padding: 11px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    font-size: 14px;
-    box-sizing: border-box;
-    background-color: #fff;
+.form-group select, 
+.form-group input {
+    padding: 0.8rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    background: #ffffff;
+    color: var(--secondary-dark);
+    transition: all 0.2s ease;
 }
 
-.btn-predict, .btn-submit {
-    width: 100%;
-    color: white;
-    border: none;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s;
+.form-group select:focus, 
+.form-group input:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .btn-predict {
-    background-color: var(--primary-blue);
+    width: 100%;
+    background: var(--primary-blue);
+    color: #ffffff;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);
 }
 
 .btn-predict:hover {
-    background-color: #0052a3;
+    background: var(--primary-light);
+    transform: translateY(-2px);
 }
 
-.btn-submit {
-    background-color: var(--success-green);
+/* Results Output Matrix */
+.results-section {
+    display: none;
+    margin-top: 2rem;
+    animation: fadeInResults 0.4s ease-out;
 }
 
-.btn-submit:hover {
-    background-color: #00b359;
+@keyframes fadeInResults {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.results-panel h2 {
-    font-size: 20px;
+.results-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--secondary-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.college-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .college-card {
     background: var(--card-bg);
-    border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
     border-left: 5px solid var(--primary-blue);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 1.75rem;
+    border-radius: 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.college-info {
-    max-width: 75%;
+.college-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px -3px rgba(0,0,0,0.06);
+}
+
+.college-header-flex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
 }
 
 .college-name {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 0 0 5px 0;
+    font-size: 1.25rem;
+    color: var(--secondary-dark);
+    font-weight: 800;
 }
 
-.college-location {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 15px;
+.badge-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
 }
 
-.details-list {
-    margin: 15px 0 0 0;
-    padding-left: 0;
-    list-style: none;
+.badge-govt { background: #d1fae5; color: #065f46; }
+.badge-private { background: #eff6ff; color: #1e40af; }
+.badge-placement { background: #fef3c7; color: #92400e; }
+
+.college-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 0.85rem 1rem;
+    background: var(--background-base);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
 }
 
-.details-list li {
-    margin-bottom: 8px;
-    font-size: 14px;
+.metric-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.metric-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.metric-value {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--secondary-dark);
+}
+
+.highlight-branch {
+    color: var(--primary-blue);
 }
 
 .btn-apply {
-    background-color: var(--success-green);
-    color: white;
+    background: var(--success-green);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
     text-decoration: none;
-    padding: 12px 25px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 15px;
-    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     white-space: nowrap;
+    height: fit-content;
+    align-self: center;
 }
 
 .btn-apply:hover {
-    background-color: #00b359;
+    background: var(--success-hover);
 }
 
-.college-alert-box {
-    background-color: #e6f2ff;
-    border-left: 4px solid var(--primary-blue);
-    padding: 12px;
-    border-radius: 4px;
+/* Independent Counselor Application Screen */
+#application-page {
+    display: none;
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04);
+    border: 1px solid var(--border-color);
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
     font-weight: 600;
-    margin-bottom: 25px;
-    color: #004080;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.92rem;
+    transition: color 0.2s;
 }
 
-.back-link {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #666;
-    text-decoration: none;
-    font-size: 14px;
+.back-btn:hover {
+    color: var(--primary-blue);
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .college-card {
+        grid-template-columns: 1fr;
+    }
+    .btn-apply {
+        width: 100%;
+    }
 }
