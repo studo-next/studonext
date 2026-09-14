@@ -1,363 +1,1638 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Canonical Tag for Root Domain -->
-    <link rel="canonical" href="https://www.studonext.online/" />
 
-    <!-- Schema.org Structured Data with Custom Domain -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "studonext",
-      "url": "https://www.studonext.online/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.studonext.online/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>studonext | Your Next Step to a Smarter Future</title>
-    <meta name="description" content="studonext is an advanced AI College Predictor, Resume Builder, and peer-to-peer book marketplace designed for technical diploma and degree students.">
-    <meta name="keywords" content="college predictor, resume builder, book marketplace, student resources, offline training institutes, studonext, West Bengal colleges">
-    <meta name="author" content="Indrajit Samanta">
+<title>STUDONEXT | Under Maintenance</title>
 
-    <!-- Open Graph Metadata -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="studonext | Your Next Step to a Smarter Future">
-    <meta property="og:description" content="Predict your ideal engineering college, build professional ATS resumes, and trade academic books instantly.">
-    <meta property="og:url" content="https://www.studonext.online/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-</head>
-<body>
-    <div class="book-page-open">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Unified Header Navigation Bar -->
-    <header class="header">
-        <div class="container navbar">
-            <a href="index.html" class="logo">studo<span>next</span></a>
-            
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="predictor.html" class="nav-link">College Predictor</a>
-                <a href="marketplace.html" class="nav-link">Book Marketplace</a>
-                <a href="courses.html" class="nav-link">Courses</a>
-                <a href="suggestions.html" class="nav-link">Exam Suggestions</a>
-                <a href="resume-builder.html" class="nav-link">Resume Builder</a>
-                <a href="news.html" class="nav-link">News</a>
-                <a href="admin.html" class="nav-admin-link">Admin Login</a>
-                <button class="btn btn-sm btn-primary nav-login-btn" onclick="openLoginModal()">Login / Sign Up</button>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Breaking News Ticker -->
-    <div class="breaking-news-ticker">
-        <div class="ticker-title">
-            <i class="fas fa-bell animate-bell"></i> LATEST ALERTS
-        </div>
-        <div class="ticker-content-wrap">
-            <div class="ticker-text-move">
-                <span>📢 SVMCM Scholarship 2026 Fresh & Renewal Application Started. Check your eligibility now!</span>
-                <span>📌 Oasis and National Scholarship Portal (NSP) last date extended till next month.</span>
-                <span>📣 WBSCTVESD Diploma Semester Exam routine published. Download notifications from the suggestion hub.</span>
-                <span>🚀 Premium Resume Builder tool is now live! Create your corporate-ready resume with photo for free.</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero book-element-popup">
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <span class="hero-badge">Empowering Education</span>
-                <h1>Your Next Step to a Smarter Future</h1>
-                <p>Predict your dream college, buy affordable study materials, learn industry-ready skills, and check your academic results—all in one unified smart platform.</p>
-                <div class="hero-actions">
-                    <a href="predictor.html" class="btn btn-primary">Predict College Now</a>
-                    <a href="courses.html" class="btn btn-secondary">Explore Courses</a>
-                </div>
-            </div>
-            <div class="hero-image-placeholder">
-                <div class="hero-graphic">
-                    <i class="fas fa-graduation-cap graphic-icon"></i>
-                    <div class="graphic-card card-1"><i class="fas fa-chart-line"></i> Success</div>
-                    <div class="graphic-card card-2"><i class="fas fa-book"></i> Resources</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature Hubs -->
-    <section class="feature-gateways" style="padding: 5rem 0;">
-        <div class="container">
-            <div class="section-header" style="text-align: center; margin-bottom: 3.5rem;">
-                <h2>Explore Specialized Student Hubs</h2>
-                <p>Quick access to all the major tools and resources on StudoNext.</p>
-            </div>
-
-            <div class="gateway-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                
-                <a href="marketplace.html" class="gateway-card" style="text-decoration: none; display: block;">
-                    <div style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; padding: 2rem; text-align: center;">
-                        <div style="width: 60px; height: 60px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                            <i class="fas fa-store" style="color: #2563eb; font-size: 1.5rem;"></i>
-                        </div>
-                        <h3 style="color: #1e293b; font-size: 1.3rem; margin-bottom: 0.5rem;">Book Marketplace</h3>
-                        <p style="color: #64748b; font-size: 0.95rem;">Buy and sell used textbooks directly with your college seniors. Safe & direct.</p>
-                    </div>
-                </a>
-
-                <a href="suggestions.html" class="gateway-card" style="text-decoration: none; display: block;">
-                    <div style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; padding: 2rem; text-align: center;">
-                        <div style="width: 60px; height: 60px; background: #fff1f2; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                            <i class="fas fa-file-pdf" style="color: #e11d48; font-size: 1.5rem;"></i>
-                        </div>
-                        <h3 style="color: #1e293b; font-size: 1.3rem; margin-bottom: 0.5rem;">Board Exam Hub</h3>
-                        <p style="color: #64748b; font-size: 0.95rem;">Download suggestions and previous year papers for WBBSE & WBCHSE boards.</p>
-                    </div>
-                </a>
-
-                <a href="courses.html" class="gateway-card" style="text-decoration: none; display: block;">
-                    <div style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; padding: 2rem; text-align: center;">
-                        <div style="width: 60px; height: 60px; background: #f0fdf4; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                            <i class="fas fa-laptop-code" style="color: #16a34a; font-size: 1.5rem;"></i>
-                        </div>
-                        <h3 style="color: #1e293b; font-size: 1.3rem; margin-bottom: 0.5rem;">Training & Skills</h3>
-                        <p style="color: #64748b; font-size: 0.95rem;">Bridge the gap between academic theory and industry skills with free vocational courses.</p>
-                    </div>
-                </a>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <a href="#" class="logo">studo<span>next</span></a>
-                <p>Building the modern ecosystem for structural educational progress and career advancement pipelines.</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/7872252866" target="_blank" rel="noopener noreferrer" style="background-color: #25d366;"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.youtube.com/@Indrajitsvlogs01" target="_blank" rel="noopener noreferrer" style="background-color: #ff0000;"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <h4>Quick Explorations</h4>
-                <a href="predictor.html">College Predictor</a>
-                <a href="marketplace.html">Book Marketplace</a>
-                <a href="courses.html">Courses Hub</a>
-            </div>
-            <div class="footer-links">
-                <h4>Legal & Support</h4>
-                <a href="about.html">About Us</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Use</a>
-                <a href="support.html">Contact Support</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 studonext by Indrajit Samanta. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Google Auth Hidden Script Container -->
-    <div id="g_id_onload"
-         data-client_id="924536809345-ak7kuae3s5eg77dflnlqdb6uphgcrbrf.apps.googleusercontent.com"
-         data-context="signin"
-         data-ux_mode="popup"
-         data-callback="handleCredentialResponse"
-         data-auto_prompt="false">
-    </div>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal hidden">
-        <div class="modal-content login-modal-content">
-            <div class="modal-header">
-                <h3>Access studonext</h3>
-                <button type="button" class="close-modal" onclick="closeLoginModal()">&times;</button>
-            </div>
-            <div class="modal-body" style="text-align: center; padding: 2.5rem 2rem;">
-                <h4 style="margin-bottom: 0.5rem;">Welcome Back!</h4>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Sign up or login instantly using your Google Identity.</p>
-                
-                <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
-                    <div class="g_id_signin"
-                         data-type="standard"
-                         data-shape="pill"
-                         data-theme="outline"
-                         data-text="signin_with"
-                         data-size="large"
-                         data-logo_alignment="left">
-                    </div>
-                </div>
-
-                <div style="font-size: 0.8rem; color: var(--text-muted);">
-                    By continuing, you agree to studonext's Terms & Privacy Policy.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating WhatsApp Support Button -->
-    <a href="https://wa.me/917872252866?text=Hello%20StudoNext%20Support,%20I%20need%20assistance..." 
-       class="whatsapp-support-floating" 
-       target="_blank" 
-       title="Contact Student Support">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Main JavaScript Logic Engine -->
-    <script>
-        // 1. Mobile Navigation Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
-
-        if (menuToggle && navMenu) {
-            menuToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-            });
-        }
-
-        // 2. Login Modal Control Functions
-        const loginModal = document.getElementById('loginModal');
-
-        function openLoginModal() { 
-            if (loginModal) loginModal.classList.remove('hidden'); 
-        }
-        function closeLoginModal() { 
-            if (loginModal) loginModal.classList.add('hidden'); 
-        }
-
-        window.addEventListener('click', (e) => {
-            if (e.target === loginModal) loginModal.classList.add('hidden');
-        });
-
-        // 3. Google Script Auth URL (Google Sheets Database Sync)
-        const GOOGLE_AUTH_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUgJ-la2xeCeE8VcL2LuWd2OT_GiY7j-5c3UgseGqxAYjBbnKHOE7PgBhXMkRZ7Bfh/exec';
-
-        // 4. GOOGLE SIGN-IN CREDENTIAL HANDLER FUNCTION
-        function handleCredentialResponse(response) {
-            // Google JWT Token Decoding
-            const responsePayload = parseJwt(response.credential);
-
-            // Save user profile data to LocalStorage for Student Dashboard
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('username', responsePayload.name);
-            localStorage.setItem('userEmail', responsePayload.email);
-            localStorage.setItem('userPicture', responsePayload.picture);
-
-            // Background async save to Google Sheet Backend
-            let authData = new FormData();
-            authData.append('action', 'google_signup');
-            authData.append('userId', responsePayload.sub);
-            authData.append('name', responsePayload.name);
-            authData.append('email', responsePayload.email);
-            authData.append('picture', responsePayload.picture);
-
-            fetch(GOOGLE_AUTH_SCRIPT_URL, {
-                method: 'POST',
-                body: authData
-            }).catch(err => console.error("Sheet Sync Error:", err));
-
-            alert('Welcome back, ' + responsePayload.name + '!');
-            closeLoginModal();
-            window.location.href = 'dashboard.html'; // Direct redirect to Dashboard
-        }
-
-        // Helper JWT Parser
-        function parseJwt(token) {
-            let base64Url = token.split('.')[1];
-            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            let jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
-        }
-
-        // 5. Dynamic Navbar Profile Button Renderer on Page Load
-        window.addEventListener('load', () => {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            const username = localStorage.getItem('username');
-            const loginBtn = document.querySelector('.nav-login-btn');
-
-            if (isLoggedIn === 'true' && username && loginBtn) {
-                loginBtn.innerHTML = '<i class="fas fa-user-circle"></i> Profile';
-                loginBtn.onclick = () => { window.location.href = 'dashboard.html'; };
-            }
-        });
-        let cyberTriggered = false;
-
-function activateCyberAlert(){
-
-    if(cyberTriggered) return;
-
-    cyberTriggered = true;
-
-    document
-    .getElementById("cyber-alert")
-    .classList.add("active");
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-setInterval(()=>{
+body{
+font-family:'Poppins',sans-serif;
+background:#020617;
+overflow-x:hidden;
+color:#fff;
+min-height:100vh;
+position:relative;
+}
 
-    if(
-        window.outerWidth - window.innerWidth > 160 ||
-        window.outerHeight - window.innerHeight > 160
-    ){
-        activateCyberAlert();
+/* Background */
+
+.background{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top,
+#0f172a,
+#020617,
+#000000);
+z-index:-10;
+overflow:hidden;
+}
+
+/* Stars */
+
+.stars{
+position:absolute;
+width:100%;
+height:100%;
+background-image:
+radial-gradient(#00d9ff 1px, transparent 1px),
+radial-gradient(#ffffff 1px, transparent 1px),
+radial-gradient(#7b2cff 1px, transparent 1px);
+
+background-size:
+120px 120px,
+200px 200px,
+300px 300px;
+
+animation:starsMove 120s linear infinite;
+opacity:.8;
+}
+
+@keyframes starsMove{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(-1000px);
+}
+
+}
+
+/* Shooting Stars */
+
+.shooting-star{
+position:absolute;
+width:250px;
+height:3px;
+background:linear-gradient(
+90deg,
+#ffffff,
+#00d9ff,
+transparent
+);
+
+border-radius:50px;
+filter:blur(1px);
+}
+
+.star1{
+top:10%;
+left:-300px;
+animation:shoot1 8s linear infinite;
+}
+
+.star2{
+top:25%;
+left:-500px;
+animation:shoot2 12s linear infinite;
+}
+
+.star3{
+top:45%;
+left:-600px;
+animation:shoot3 10s linear infinite;
+}
+
+@keyframes shoot1{
+0%{
+transform:translate(0,0) rotate(25deg);
+opacity:0;
+}
+10%{
+opacity:1;
+}
+100%{
+transform:translate(1800px,700px)
+rotate(25deg);
+opacity:0;
+}
+}
+
+@keyframes shoot2{
+0%{
+transform:translate(0,0) rotate(25deg);
+opacity:0;
+}
+10%{
+opacity:1;
+}
+100%{
+transform:translate(2000px,900px)
+rotate(25deg);
+opacity:0;
+}
+}
+
+@keyframes shoot3{
+0%{
+transform:translate(0,0) rotate(25deg);
+opacity:0;
+}
+10%{
+opacity:1;
+}
+100%{
+transform:translate(2200px,1000px)
+rotate(25deg);
+opacity:0;
+}
+}
+
+/* Main Container */
+
+.container{
+
+width:95%;
+max-width:1300px;
+
+margin:40px auto;
+
+padding:40px;
+
+text-align:center;
+
+background:
+rgba(255,255,255,.05);
+
+backdrop-filter:blur(18px);
+
+border:1px solid
+rgba(255,255,255,.08);
+
+border-radius:30px;
+
+box-shadow:
+0 0 50px rgba(0,217,255,.20),
+0 0 120px rgba(123,44,255,.15);
+
+}
+
+/* Logo */
+
+.logo{
+font-family:'Orbitron',sans-serif;
+font-size:55px;
+font-weight:800;
+letter-spacing:3px;
+}
+
+.logo span{
+color:#00d9ff;
+}
+
+.tagline{
+margin-top:10px;
+color:#d1d5db;
+font-size:18px;
+}
+
+/* Badge */
+
+.badge{
+
+display:inline-block;
+
+margin-top:30px;
+
+padding:12px 25px;
+
+border-radius:50px;
+
+background:
+linear-gradient(
+90deg,
+#00d9ff,
+#7b2cff
+);
+
+font-weight:600;
+
+box-shadow:
+0 0 30px
+rgba(0,217,255,.5);
+
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.05);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+/* Title */
+
+.main-title{
+
+font-family:'Orbitron',sans-serif;
+
+font-size:100px;
+
+margin-top:30px;
+
+line-height:1;
+
+animation:glow 2s infinite alternate;
+}
+
+.main-title span{
+display:block;
+color:#00d9ff;
+}
+
+@keyframes glow{
+
+from{
+
+text-shadow:
+0 0 20px #00d9ff,
+0 0 40px #00d9ff;
+
+}
+
+to{
+
+text-shadow:
+0 0 30px #7b2cff,
+0 0 60px #7b2cff,
+0 0 90px #7b2cff;
+
+}
+
+}
+
+/* Typing Text */
+
+.typing{
+
+margin-top:25px;
+
+height:40px;
+
+font-size:28px;
+
+font-weight:600;
+
+color:#00d9ff;
+}
+/* Description */
+
+.description{
+
+max-width:900px;
+
+margin:30px auto;
+
+font-size:20px;
+
+line-height:1.8;
+
+color:#d1d5db;
+
+}
+
+/* Features */
+
+.feature-box{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:15px;
+
+margin-top:40px;
+
+}
+
+.feature{
+
+padding:15px 25px;
+
+background:
+rgba(255,255,255,.06);
+
+border:1px solid
+rgba(255,255,255,.08);
+
+border-radius:15px;
+
+font-weight:600;
+
+transition:.4s;
+
+}
+
+.feature:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+0 0 25px rgba(0,217,255,.4);
+
+}
+
+/* Countdown */
+
+.count-title{
+
+margin-top:60px;
+
+font-size:26px;
+
+letter-spacing:2px;
+
+color:#00d9ff;
+
+}
+
+.countdown{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:20px;
+
+margin-top:30px;
+
+}
+
+.time-box{
+
+width:150px;
+
+padding:25px;
+
+border-radius:20px;
+
+background:
+rgba(255,255,255,.05);
+
+border:1px solid
+rgba(255,255,255,.08);
+
+box-shadow:
+0 0 20px rgba(0,217,255,.15);
+
+transition:.4s;
+
+}
+
+.time-box:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+0 0 35px rgba(0,217,255,.4);
+
+}
+
+.time-box span{
+
+display:block;
+
+font-size:50px;
+
+font-weight:700;
+
+color:#00d9ff;
+
+}
+
+.time-box small{
+
+font-size:14px;
+
+letter-spacing:2px;
+
+color:#cbd5e1;
+
+}
+
+/* Progress */
+
+.progress-section{
+
+margin-top:60px;
+
+}
+
+.progress-section h4{
+
+margin-bottom:15px;
+
+font-size:22px;
+
+color:#ffffff;
+
+}
+
+.progress-container{
+
+width:100%;
+
+max-width:800px;
+
+height:25px;
+
+margin:auto;
+
+background:
+rgba(255,255,255,.08);
+
+border-radius:50px;
+
+overflow:hidden;
+
+}
+
+.progress-bar{
+
+height:100%;
+
+width:78%;
+
+background:
+linear-gradient(
+90deg,
+#00d9ff,
+#7b2cff
+);
+
+display:flex;
+
+align-items:center;
+
+justify-content:flex-end;
+
+padding-right:15px;
+
+font-weight:700;
+
+animation:progressGlow 2s infinite alternate;
+
+}
+
+@keyframes progressGlow{
+
+from{
+filter:brightness(1);
+}
+
+to{
+filter:brightness(1.4);
+}
+
+}
+
+.progress-value{
+
+color:#fff;
+
+}
+
+/* Stats */
+
+.stats{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:25px;
+
+margin-top:60px;
+
+}
+
+.stat-card{
+
+width:220px;
+
+padding:25px;
+
+background:
+rgba(255,255,255,.05);
+
+border-radius:20px;
+
+border:1px solid
+rgba(255,255,255,.08);
+
+transition:.4s;
+
+}
+
+.stat-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:
+0 0 30px rgba(123,44,255,.4);
+
+}
+
+.stat-card h2{
+
+font-size:42px;
+
+color:#00d9ff;
+
+margin-bottom:10px;
+
+}
+
+.stat-card p{
+
+font-size:18px;
+
+color:#d1d5db;
+
+}
+
+/* Info Cards */
+
+.info-section{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:20px;
+
+margin-top:60px;
+
+}
+
+.info-card{
+
+width:280px;
+
+padding:25px;
+
+background:
+rgba(255,255,255,.05);
+
+border-radius:20px;
+
+border:1px solid
+rgba(255,255,255,.08);
+
+}
+
+.info-card i{
+
+font-size:40px;
+
+color:#00d9ff;
+
+margin-bottom:15px;
+
+}
+
+.info-card p{
+
+line-height:1.8;
+
+}
+/* India Badge */
+
+.india-badge{
+
+margin-top:60px;
+
+display:inline-block;
+
+padding:15px 30px;
+
+border-radius:50px;
+
+background:
+linear-gradient(
+90deg,
+rgba(255,153,51,.2),
+rgba(255,255,255,.15),
+rgba(19,136,8,.2)
+);
+
+border:1px solid
+rgba(255,255,255,.1);
+
+font-weight:700;
+
+letter-spacing:1px;
+
+box-shadow:
+0 0 25px rgba(255,153,51,.25);
+
+}
+
+/* Social Section */
+
+.social-title{
+
+margin-top:60px;
+
+font-size:24px;
+
+font-weight:600;
+
+}
+
+.social-icons{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:20px;
+
+margin-top:25px;
+
+}
+
+.social-icons a{
+
+width:60px;
+
+height:60px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:50%;
+
+background:
+rgba(255,255,255,.05);
+
+border:1px solid
+rgba(255,255,255,.08);
+
+font-size:24px;
+
+color:#ffffff;
+
+text-decoration:none;
+
+transition:.4s;
+
+}
+
+.social-icons a:hover{
+
+transform:
+translateY(-10px)
+rotate(360deg);
+
+background:
+linear-gradient(
+135deg,
+#00d9ff,
+#7b2cff
+);
+
+box-shadow:
+0 0 30px rgba(0,217,255,.5);
+
+}
+
+/* Footer */
+
+.footer{
+
+margin-top:50px;
+
+padding-top:30px;
+
+border-top:1px solid
+rgba(255,255,255,.08);
+
+color:#94a3b8;
+
+font-size:15px;
+
+}
+
+/* Floating Elements */
+
+.floating{
+
+position:fixed;
+
+z-index:-1;
+
+font-size:45px;
+
+opacity:.15;
+
+color:#00d9ff;
+
+}
+
+.gear1{
+
+top:15%;
+
+left:5%;
+
+animation:
+rotateGear 15s linear infinite;
+}
+
+.gear2{
+
+bottom:15%;
+
+right:5%;
+
+animation:
+rotateGearReverse 15s linear infinite;
+}
+
+.rocket{
+
+top:60%;
+
+left:10%;
+
+animation:
+floatRocket 6s ease-in-out infinite;
+}
+
+.bolt{
+
+top:25%;
+
+right:10%;
+
+animation:
+floatBolt 5s ease-in-out infinite;
+}
+
+@keyframes rotateGear{
+
+from{
+transform:rotate(0deg);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+@keyframes rotateGearReverse{
+
+from{
+transform:rotate(360deg);
+}
+
+to{
+transform:rotate(0deg);
+}
+
+}
+
+@keyframes floatRocket{
+
+0%{
+transform:
+translateY(0px);
+}
+
+50%{
+transform:
+translateY(-25px);
+}
+
+100%{
+transform:
+translateY(0px);
+}
+
+}
+
+@keyframes floatBolt{
+
+0%{
+transform:
+translateY(0px);
+}
+
+50%{
+transform:
+translateY(-20px);
+}
+
+100%{
+transform:
+translateY(0px);
+}
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-track{
+background:#020617;
+}
+
+::-webkit-scrollbar-thumb{
+background:#00d9ff;
+border-radius:20px;
+}
+
+/* Mobile Responsive */
+
+@media(max-width:992px){
+
+.main-title{
+font-size:70px;
+}
+
+.logo{
+font-size:42px;
+}
+
+.description{
+font-size:18px;
+}
+
+}
+
+@media(max-width:768px){
+
+.container{
+padding:25px;
+}
+
+.main-title{
+font-size:55px;
+}
+
+.typing{
+font-size:20px;
+}
+
+.time-box{
+width:120px;
+padding:20px;
+}
+
+.time-box span{
+font-size:36px;
+}
+
+.stat-card{
+width:100%;
+max-width:280px;
+}
+
+.info-card{
+width:100%;
+}
+
+}
+
+@media(max-width:480px){
+
+.main-title{
+font-size:42px;
+}
+
+.logo{
+font-size:34px;
+}
+
+.description{
+font-size:16px;
+}
+
+.badge{
+font-size:14px;
+padding:10px 20px;
+}
+
+.time-box{
+width:100px;
+}
+
+.time-box span{
+font-size:28px;
+}
+
+.social-icons a{
+width:50px;
+height:50px;
+font-size:20px;
+}
+
+}
+.particle{
+position:fixed;
+border-radius:50%;
+pointer-events:none;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Background -->
+
+<div class="background">
+
+<div class="stars"></div>
+
+<div class="shooting-star star1"></div>
+<div class="shooting-star star2"></div>
+<div class="shooting-star star3"></div>
+
+</div>
+
+<!-- Floating Elements -->
+
+<div class="floating gear1">
+<i class="fas fa-cog"></i>
+</div>
+
+<div class="floating gear2">
+<i class="fas fa-cog"></i>
+</div>
+
+<div class="floating rocket">
+<i class="fas fa-rocket"></i>
+</div>
+
+<div class="floating bolt">
+<i class="fas fa-bolt"></i>
+</div>
+
+<!-- Main Container -->
+
+<div class="container">
+
+<!-- Logo -->
+
+<div class="logo-box">
+
+<h2 class="logo">
+STUDO<span>NEXT</span>
+</h2>
+
+<p class="tagline">
+Learn • Explore • Succeed
+</p>
+
+</div>
+
+<!-- Badge -->
+
+<div class="badge">
+🚀 VERSION 1.0.2 COMING SOON
+</div>
+
+<!-- Main Heading -->
+
+<h1 class="main-title">
+UNDER
+<span>MAINTENANCE</span>
+</h1>
+
+<!-- Typing Animation -->
+
+<h3 class="typing"></h3>
+
+<!-- Main Description -->
+
+<p class="description">
+
+We are building something extraordinary for students across India.
+
+Get ready for blazing-fast performance, AI-powered learning tools, smarter resources and an experience you've never seen before.
+
+</p>
+
+<!-- Highlights -->
+
+<div class="feature-box">
+
+<div class="feature">
+⚡ Faster Platform
+</div>
+
+<div class="feature">
+🤖 AI Learning Tools
+</div>
+
+<div class="feature">
+📚 Premium Resources
+</div>
+
+<div class="feature">
+🇮🇳 Made For India
+</div>
+
+</div>
+
+<!-- Countdown -->
+
+<h3 class="count-title">
+
+WE WILL BE BACK IN
+
+</h3>
+
+<div class="countdown">
+
+<div class="time-box">
+
+<span id="days">00</span>
+
+<small>DAYS</small>
+
+</div>
+
+<div class="time-box">
+
+<span id="hours">00</span>
+
+<small>HOURS</small>
+
+</div>
+
+<div class="time-box">
+
+<span id="minutes">00</span>
+
+<small>MINUTES</small>
+
+</div>
+
+<div class="time-box">
+
+<span id="seconds">00</span>
+
+<small>SECONDS</small>
+
+</div>
+
+</div>
+
+<!-- Progress Section -->
+
+<div class="progress-section">
+
+<h4 id="statusText">
+
+Initializing Upgrade...
+
+</h4>
+
+<div class="progress-container">
+
+<div class="progress-bar">
+
+<span class="progress-value">
+78%
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Statistics -->
+
+<div class="stats">
+
+<div class="stat-card">
+
+<h2>50K+</h2>
+
+<p>Students</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>500+</h2>
+
+<p>Resources</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>24x7</h2>
+
+<p>Support</p>
+
+</div>
+
+</div>
+
+<!-- Info Cards -->
+
+<div class="info-section">
+
+<div class="info-card">
+
+<i class="fas fa-clock"></i>
+
+<p>
+
+Expected Return
+
+<br>
+
+<strong>Within 2 Hours</strong>
+
+</p>
+
+</div>
+
+<div class="info-card">
+
+<i class="fas fa-heart"></i>
+
+<p>
+
+Thank You For
+
+<br>
+
+<strong>Your Support</strong>
+
+</p>
+
+</div>
+
+</div>
+
+<!-- India Badge -->
+
+<div class="india-badge">
+
+🇮🇳 INDIA'S NEXT GENERATION LEARNING PLATFORM
+
+</div>
+
+<!-- Social -->
+
+<div class="social-title">
+
+Stay Connected
+
+</div>
+
+<div class="social-icons">
+
+<a href="#">
+<i class="fab fa-facebook-f"></i>
+</a>
+
+<a href="#">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="#">
+<i class="fab fa-youtube"></i>
+</a>
+
+<a href="#">
+<i class="fab fa-linkedin-in"></i>
+</a>
+
+<a href="#">
+<i class="fas fa-envelope"></i>
+</a>
+
+</div>
+
+<!-- Footer -->
+
+<div class="footer">
+
+© 2026 STUDONEXT. All Rights Reserved.
+
+</div>
+
+</div>
+
+<script>
+/* ===================================
+   COUNTDOWN TIMER
+=================================== */
+
+const launchDate = new Date();
+launchDate.setHours(launchDate.getHours() + 2);
+
+function updateCountdown() {
+
+    const now = new Date().getTime();
+    const distance = launchDate - now;
+
+    const days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+        (distance % (1000 * 60))
+        / 1000
+    );
+
+    document.getElementById("days").innerHTML =
+        String(days).padStart(2, "0");
+
+    document.getElementById("hours").innerHTML =
+        String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").innerHTML =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").innerHTML =
+        String(seconds).padStart(2, "0");
+
+    if (distance < 0) {
+
+        document.getElementById("days").innerHTML = "00";
+        document.getElementById("hours").innerHTML = "00";
+        document.getElementById("minutes").innerHTML = "00";
+        document.getElementById("seconds").innerHTML = "00";
+
     }
 
-},1000);
-    </script>
+}
 
-</div>
-<div id="cyber-alert">
-    <div class="cyber-box">
+setInterval(updateCountdown, 1000);
 
-        <div class="cyber-title">
-            SECURITY PROTOCOL
-        </div>
 
-        <div class="cyber-status">
-            Developer Tools Detected
-        </div>
 
-        <div class="cyber-progress">
-            <div class="cyber-bar"></div>
-        </div>
+/* ===================================
+   TYPEWRITER EFFECT
+=================================== */
 
-        <div class="cyber-terminal">
-            > Initializing Security Engine...<br>
-            > Verifying Browser Environment...<br>
-            > Activating Protection Layer...<br>
-            > Monitoring Session Activity...<br>
-            > Access Restriction Enabled...
-        </div>
+const typingTexts = [
 
-        <div class="cyber-warning">
-            Please close Developer Tools to continue.
-        </div>
+    "🚀 India's Fastest Learning Platform",
 
-    </div>
-</div>
+    "⚡ Smarter • Faster • Better",
+
+    "🤖 AI Powered Education System",
+
+    "📚 Premium Learning Resources",
+
+    "🇮🇳 Built For India's Future"
+
+];
+
+let textIndex = 0;
+let charIndex = 0;
+let currentText = "";
+let isDeleting = false;
+
+function typeEffect() {
+
+    currentText = typingTexts[textIndex];
+
+    const typingElement =
+        document.querySelector(".typing");
+
+    if (!isDeleting) {
+
+        typingElement.innerHTML =
+            currentText.substring(0, charIndex + 1);
+
+        charIndex++;
+
+        if (charIndex === currentText.length) {
+
+            isDeleting = true;
+
+            setTimeout(typeEffect, 2000);
+
+            return;
+        }
+
+    } else {
+
+        typingElement.innerHTML =
+            currentText.substring(0, charIndex - 1);
+
+        charIndex--;
+
+        if (charIndex === 0) {
+
+            isDeleting = false;
+
+            textIndex++;
+
+            if (textIndex >= typingTexts.length) {
+                textIndex = 0;
+            }
+
+        }
+
+    }
+
+    setTimeout(
+        typeEffect,
+        isDeleting ? 40 : 80
+    );
+
+}
+
+typeEffect();
+
+
+
+/* ===================================
+   STATUS TEXT CHANGER
+=================================== */
+
+const statusMessages = [
+
+    "⚙ Installing AI Modules...",
+
+    "🚀 Deploying New Features...",
+
+    "📚 Updating Learning Resources...",
+
+    "⚡ Optimizing Performance...",
+
+    "🔒 Improving Security Systems...",
+
+    "🤖 Training Smart Assistant...",
+
+    "🌐 Upgrading Server Infrastructure...",
+
+    "🎯 Finalizing Experience..."
+
+];
+
+let statusIndex = 0;
+
+setInterval(() => {
+
+    document.getElementById("statusText")
+        .innerHTML =
+        statusMessages[statusIndex];
+
+    statusIndex++;
+
+    if (statusIndex >= statusMessages.length) {
+        statusIndex = 0;
+    }
+
+}, 2500);
+
+
+
+/* ===================================
+   ANIMATED PROGRESS BAR
+=================================== */
+
+const progressBar =
+    document.querySelector(".progress-bar");
+
+const progressValue =
+    document.querySelector(".progress-value");
+
+let progress = 0;
+
+function animateProgress() {
+
+    progress += 1;
+
+    if (progress > 100) {
+        progress = 0;
+    }
+
+    progressBar.style.width =
+        progress + "%";
+
+    progressValue.innerHTML =
+        progress + "%";
+
+}
+
+setInterval(
+    animateProgress,
+    180
+);
+
+
+
+/* ===================================
+   RANDOM GLOW EFFECT
+=================================== */
+
+const featureCards =
+    document.querySelectorAll(
+        ".feature, .stat-card, .info-card"
+    );
+
+setInterval(() => {
+
+    featureCards.forEach(card => {
+
+        card.style.boxShadow =
+            "0 0 0px transparent";
+
+    });
+
+    const random =
+        Math.floor(
+            Math.random() *
+            featureCards.length
+        );
+
+    featureCards[random].style.boxShadow =
+        "0 0 35px rgba(0,217,255,.7)";
+
+}, 1500);
+
+
+
+/* ===================================
+   FLOATING PARTICLES
+=================================== */
+
+function createParticle() {
+
+    const particle =
+        document.createElement("div");
+
+    particle.classList.add("particle");
+
+    document.body.appendChild(particle);
+
+    const size =
+        Math.random() * 6 + 2;
+
+    particle.style.width =
+        size + "px";
+
+    particle.style.height =
+        size + "px";
+
+    particle.style.left =
+        Math.random() * window.innerWidth
+        + "px";
+
+    particle.style.bottom = "-10px";
+
+    particle.style.position = "fixed";
+
+    particle.style.borderRadius = "50%";
+
+    particle.style.background =
+        "rgba(0,217,255,.7)";
+
+    particle.style.zIndex = "-1";
+
+    particle.style.pointerEvents = "none";
+
+    const duration =
+        Math.random() * 8 + 4;
+
+    particle.animate([
+
+        {
+            transform:
+                "translateY(0px)",
+            opacity: 1
+        },
+
+        {
+            transform:
+                `translateY(-${window.innerHeight + 200}px)`,
+            opacity: 0
+        }
+
+    ], {
+
+        duration:
+            duration * 1000,
+
+        easing: "linear"
+
+    });
+
+    setTimeout(() => {
+
+        particle.remove();
+
+    }, duration * 1000);
+
+}
+
+setInterval(createParticle, 300);
+
+
+
+/* ===================================
+   TITLE BLINK EFFECT
+=================================== */
+
+const badge =
+    document.querySelector(".badge");
+
+setInterval(() => {
+
+    badge.style.transform =
+        "scale(1.08)";
+
+    setTimeout(() => {
+
+        badge.style.transform =
+            "scale(1)";
+
+    }, 500);
+
+}, 3000);
+
+
+
+/* ===================================
+   CONSOLE EASTER EGG
+=================================== */
+
+console.log(
+"%c🚀 STUDONEXT VERSION 1.0.2 LOADING...",
+"color:#00d9ff;font-size:18px;font-weight:bold;"
+);
+
+console.log(
+"%cIndia's Fastest Learning Platform",
+"color:#7b2cff;font-size:14px;"
+);
+</script>
+
 </body>
+
 </html>
