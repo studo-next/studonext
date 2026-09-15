@@ -3,555 +3,406 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Front Page Maker | studonext</title>
-    <meta name="description" content="Generate printable single-page A4 assignment and practical cover pages.">
-    
-    <link rel="canonical" href="https://www.studonext.online/frontpage-maker.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Project Front Page Maker | studonext</title>
+
+    <!-- Font Awesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Direct PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         :root {
-            --primary-theme: #1e3a8a;
-            --accent-gold: #d97706;
+            --primary-color: #2563eb;
+            --secondary-color: #1e293b;
+            --text-main: #334155;
+            --border-color: #cbd5e1;
+            --radius-standard: 8px;
+            --radius-round: 16px;
         }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--text-main);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navbar Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--primary-color); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-standard);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary { background: var(--primary-color); color: white; }
+        .btn-primary:hover { background: #1d4ed8; }
+
+        /* Main Grid Layout */
         .maker-layout {
             display: grid;
-            grid-template-columns: 400px 1fr;
+            grid-template-columns: 380px 1fr;
             gap: 2rem;
             padding: 2rem 0;
-            max-width: 1450px;
-            margin: 0 auto;
+            align-items: start;
         }
 
         .control-panel {
             background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-round);
             padding: 1.5rem;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
             max-height: 85vh;
             overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        .panel-section-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin: 1rem 0 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 0.4rem;
+        .form-group { margin-bottom: 0.9rem; }
+        .form-group label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.3rem; }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.55rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-standard);
+            font-size: 0.85rem;
+            background: #f8fafc;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.6rem;
-        }
-
-        .form-group { margin-bottom: 0.6rem; }
-        .form-group.full-width { grid-column: span 2; }
-        .form-group label { display: block; font-size: 0.78rem; font-weight: 600; margin-bottom: 0.2rem; color: #475569; }
-        .form-group input, .form-group select { width: 100%; padding: 0.45rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; }
-
-        .preview-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .preview-container {
             background: #cbd5e1;
+            border-radius: var(--radius-round);
             padding: 1.5rem;
-            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
         }
 
-        .action-bar { margin-bottom: 1rem; }
-
-        /* Exact Printable A4 Container */
-        .a4-page {
-            width: 210mm;
-            height: 297mm;
-            background: #ffffff;
-            padding: 10mm 12mm;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        /* EXACT A4 SCREEN & PDF CANVAS TARGET */
+        .a4-wrapper {
+            width: 794px;
+            height: 1122px;
+            min-width: 794px;
+            min-height: 1122px;
+            max-width: 794px;
+            max-height: 1122px;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             position: relative;
-            color: #0f172a;
+            box-sizing: border-box;
             overflow: hidden;
         }
 
-        /* Border Designs */
-        .border-classic-double { border: 5px double var(--primary-theme); }
-        .border-modern-accent { border: 3px solid var(--primary-theme); outline: 2px dashed var(--accent-gold); outline-offset: -6px; }
-        .border-ornate { border: 6px ridge var(--primary-theme); }
-        .border-minimal { border: 1px solid #94a3b8; }
-
-        .header-section { text-align: center; }
-
-        .top-logo-img {
-            max-height: 60px;
-            max-width: 90px;
-            object-fit: contain;
-            margin-bottom: 0.2rem;
-        }
-
-        .college-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.45rem;
-            font-weight: 800;
-            color: var(--primary-theme);
-            text-transform: uppercase;
-            line-height: 1.2;
-            margin-bottom: 0.2rem;
-        }
-
-        .college-subtitle {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #475569;
-            text-transform: uppercase;
-        }
-
-        .photo-frame-container { text-align: center; margin: 0.4rem 0; }
-        .campus-photo-img {
+        .a4-page {
             width: 100%;
-            max-height: 120px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 2px solid var(--primary-theme);
+            height: 100%;
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: white;
+            box-sizing: border-box;
+            position: relative;
         }
 
-        .doc-type-banner {
+        /* Templates */
+        .tpl-1 { border: 4px double #1e293b; text-align: center; }
+        .tpl-1 .logo-preview { width: 80px; height: 80px; margin: 0 auto 0.6rem; object-fit: contain; }
+
+        .tpl-2 { border-top: 12px solid var(--primary-color); border-bottom: 12px solid var(--primary-color); text-align: left; }
+        .tpl-2 .logo-preview { width: 75px; height: 75px; object-fit: contain; }
+
+        .tpl-3 {
+            border: 2px solid #b45309;
+            background: linear-gradient(to bottom, #fffbeb 0%, #ffffff 100%);
             text-align: center;
-            margin: 0.5rem 0;
-            padding: 0.4rem 0;
-            background: rgba(30, 58, 138, 0.05);
-            border-top: 2px solid var(--primary-theme);
-            border-bottom: 2px solid var(--primary-theme);
-        }
-
-        .doc-type-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary-theme);
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
+        .tpl-3 h1, .tpl-3 h2, .tpl-3 h3 { font-family: 'Playfair Display', serif; color: #78350f; }
+        .tpl-3 .logo-preview { width: 80px; height: 80px; margin: 0 auto 0.6rem; object-fit: contain; border-radius: 50%; border: 2px solid #b45309; }
 
-        .subject-name { font-size: 0.95rem; font-weight: 600; color: #334155; margin-top: 0.15rem; }
+        /* Typography & Components */
+        .a4-header h2 { font-size: 1.25rem; text-transform: uppercase; margin-bottom: 0.2rem; line-height: 1.2; }
+        .a4-header p { font-size: 0.88rem; color: #64748b; }
+
+        .a4-title-box { margin: 1rem 0; text-align: center; }
+        .doc-heading {
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #0f172a;
+            margin-bottom: 0.8rem;
+        }
 
         .topic-box {
-            text-align: center;
-            margin: 0.5rem 0;
-            padding: 0.5rem;
-            background: #f8fafc;
-            border-radius: 6px;
-            border-left: 4px solid var(--accent-gold);
+            background: rgba(37, 99, 235, 0.04);
+            border: 1.5px dashed var(--primary-color);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            margin: 0.8rem 0;
         }
+        .topic-box span { font-size: 0.72rem; text-transform: uppercase; font-weight: 700; color: var(--primary-color); }
+        .topic-box h2 { font-size: 1.15rem; color: #0f172a; margin-top: 0.2rem; line-height: 1.3; }
 
-        .topic-label { font-size: 0.7rem; text-transform: uppercase; color: #64748b; font-weight: 700; letter-spacing: 1px; }
-        .topic-heading { font-size: 1.05rem; font-weight: 700; color: #0f172a; margin-top: 0.1rem; }
+        .subject-box { text-align: center; margin: 0.8rem 0; }
+        .subject-box span { font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; }
+        .subject-box h3 { font-size: 1.05rem; color: #1e293b; margin-top: 0.2rem; }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
-            margin-top: 0.4rem;
-        }
-
-        .info-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 0.65rem;
-        }
-
-        .info-card-header {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--primary-theme);
-            text-transform: uppercase;
-            border-bottom: 1px solid #cbd5e1;
-            padding-bottom: 0.2rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .info-row {
-            font-size: 0.78rem;
-            margin-bottom: 0.25rem;
-            color: #334155;
+        .submission-grid {
             display: flex;
             justify-content: space-between;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e2e8f0;
+            width: 100%;
         }
 
-        .info-row strong { color: #0f172a; }
-
-        .footer-signatures {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: auto;
-            padding-top: 1rem;
-        }
-
-        .signature-line {
-            border-top: 1.5px solid #475569;
-            width: 140px;
-            text-align: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding-top: 0.25rem;
-            color: #475569;
-        }
-
-        /* Strict Single-Page Printing Rules */
-        @page {
-            size: A4 portrait;
-            margin: 0;
-        }
+        .sub-block { line-height: 1.6; font-size: 0.88rem; }
+        .sub-block strong.title { display: block; font-size: 0.9rem; color: #0f172a; margin-bottom: 0.3rem; border-bottom: 1px solid #cbd5e1; }
 
         @media print {
-            html, body {
-                width: 210mm;
-                height: 297mm;
-                margin: 0 !important;
-                padding: 0 !important;
-                background: #ffffff !important;
-                overflow: hidden !important;
-            }
-
-            .header, .control-panel, .action-bar, .footer, #cyber-alert, .whatsapp-support-floating {
-                display: none !important;
-            }
-
-            .maker-layout, .preview-wrapper {
-                padding: 0 !important;
-                margin: 0 !important;
-                background: none !important;
-                display: block !important;
-            }
-
-            .a4-page {
-                position: absolute !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 210mm !important;
-                height: 297mm !important;
-                margin: 0 !important;
-                box-shadow: none !important;
-                page-break-inside: avoid !important;
-                page-break-after: avoid !important;
-                page-break-before: avoid !important;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .maker-layout { grid-template-columns: 1fr; }
-            .a4-page { transform: scale(0.72); transform-origin: top center; }
+            body * { visibility: hidden; }
+            #printableA4, #printableA4 * { visibility: visible; }
+            #printableA4 { position: absolute; left: 0; top: 0; width: 794px; height: 1122px; }
         }
     </style>
 </head>
 <body>
-    <div class="book-page-open">
-        <header class="header">
-            <div class="container navbar">
-                <a href="index.html" class="logo">studo<span>next</span></a>
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
-                <nav class="nav-menu" id="navMenu">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="predictor.html" class="nav-link">College Predictor</a>
-                    <a href="marketplace.html" class="nav-link">Book Marketplace</a>
-                    <a href="frontpage-maker.html" class="nav-link active">Front Page Maker</a>
-                    <a href="courses.html" class="nav-link">Courses</a>
-                    <a href="suggestions.html" class="nav-link">Exam Suggestions</a>
-                    <a href="resume-builder.html" class="nav-link">Resume Builder</a>
-                    <a href="news.html" class="nav-link">News</a>
-                    <a href="admin.html" class="nav-admin-link">Admin Login</a>
-                    <button class="btn btn-sm btn-primary nav-login-btn" onclick="openLoginModal()">Login / Sign Up</button>
-                </nav>
-            </div>
-        </header>
 
-        <div class="container">
-            <div class="maker-layout">
-                <div class="control-panel">
-                    <h2 style="font-size: 1.2rem; color: #0f172a;"><i class="fas fa-palette"></i> Front Page Studio</h2>
-                    
-                    <div class="panel-section-title"><i class="fas fa-paint-brush"></i> Styling Options</div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Border Style</label>
-                            <select id="borderStyle" onchange="updatePage()">
-                                <option value="border-classic-double">Classic Double</option>
-                                <option value="border-modern-accent">Modern Gold Accent</option>
-                                <option value="border-ornate">Ridge Frame</option>
-                                <option value="border-minimal">Minimal Clean</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Primary Theme Color</label>
-                            <input type="color" id="themeColor" value="#1e3a8a" onchange="updatePage()">
-                        </div>
+    <header class="header">
+        <div class="container navbar">
+            <a href="#" class="logo">studo<span>next</span></a>
+            <button class="btn btn-primary" onclick="downloadA4PDF()"><i class="fas fa-file-pdf"></i> Download A4 PDF</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="maker-layout">
+            <!-- Form Controls -->
+            <div class="control-panel">
+                <h3 style="margin-bottom: 1rem;"><i class="fas fa-sliders-h"></i> Customization Options</h3>
+
+                <div class="form-group">
+                    <label>Select Template Style</label>
+                    <select id="templateSelect" onchange="updatePreview()">
+                        <option value="tpl-1">Template 1: Classic Academic Frame</option>
+                        <option value="tpl-2">Template 2: Modern Tech Accent</option>
+                        <option value="tpl-3">Template 3: Royal Elegant Serif</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Document Heading / Type</label>
+                    <select id="docType" onchange="updatePreview()">
+                        <option value="A PRACTICAL FILE">Practical File</option>
+                        <option value="A PROJECT REPORT">Project Report</option>
+                        <option value="AN ASSIGNMENT">Assignment</option>
+                        <option value="LABORATORY REPORT">Laboratory Report</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Institution / University Name</label>
+                    <input type="text" id="collegeName" value="studonext, studonext" oninput="updatePreview()">
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Logo</label>
+                    <input type="file" id="logoInput" accept="image/*" onchange="handleLogoUpload(event)">
+                </div>
+
+                <div class="form-group">
+                    <label>Subject / Course Name</label>
+                    <input type="text" id="subjectName" value="Computer Science and Technology" oninput="updatePreview()">
+                </div>
+
+                <div class="form-group">
+                    <label>Project Topic Title</label>
+                    <input type="text" id="projectTopic" value="Design & Implementation of Web Based Student Portal" oninput="updatePreview()">
+                </div>
+
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" id="studentName" value="Indrajit Samanta" oninput="updatePreview()">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <div class="form-group">
+                        <label>Roll Number</label>
+                        <input type="text" id="rollNo" value="000-000-000-000" oninput="updatePreview()">
                     </div>
-
-                    <div class="panel-section-title"><i class="fas fa-university"></i> Institution Details</div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>College Logo</label>
-                            <input type="file" id="logoUpload" accept="image/*" onchange="previewImage(event, 'logoPreview')">
-                        </div>
-                        <div class="form-group">
-                            <label>Campus Photo</label>
-                            <input type="file" id="photoUpload" accept="image/*" onchange="previewImage(event, 'campusPhotoPreview')">
-                        </div>
-                        <div class="form-group full-width">
-                            <label>College / School Name</label>
-                            <input type="text" id="inCollege" value="StudoNext" oninput="updatePage()">
-                        </div>
-                        <div class="form-group full-width">
-                            <label>Department / Subtitle</label>
-                            <input type="text" id="inSubHeader" value="Department of Computer Science & Technology" oninput="updatePage()">
-                        </div>
-                    </div>
-
-                    <div class="panel-section-title"><i class="fas fa-file-alt"></i> Assignment Info</div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Document Title</label>
-                            <select id="inDocType" onchange="updatePage()">
-                                <option value="PRACTICAL">Practical</option>
-                                <option value="ASSIGNMENT WORK">Assignment Work</option>
-                                <option value="PROJECT">Project</option>
-                                <option value="LABORATORY FILE">Laboratory File</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Subject Name / Code</label>
-                            <input type="text" id="inSubject" value="Web Technology Lab (CST-501)" oninput="updatePage()">
-                        </div>
-                        <div class="form-group full-width">
-                            <label>Topic / Assignment Name</label>
-                            <input type="text" id="inTopic" value="" oninput="updatePage()">
-                        </div>
-                    </div>
-
-                    <div class="panel-section-title"><i class="fas fa-user-graduate"></i> Student & Teacher Details</div>
-                    <div class="form-grid">
-                        <div class="form-group full-width">
-                            <label>Student Name</label>
-                            <input type="text" id="inStudentName" value="Indrajit Samanta" oninput="updatePage()">
-                        </div>
-                        <div class="form-group">
-                            <label>Roll Number</label>
-                            <input type="text" id="inRoll" value="123456789" oninput="updatePage()">
-                        </div>
-                        <div class="form-group">
-                            <label>Registration Number</label>
-                            <input type="text" id="inReg" value="REG-2023-0987" oninput="updatePage()">
-                        </div>
-                        <div class="form-group">
-                            <label>Stream / Course</label>
-                            <input type="text" id="inStream" value="Diploma in CST" oninput="updatePage()">
-                        </div>
-                        <div class="form-group">
-                            <label>Semester / Year</label>
-                            <input type="text" id="inSem" value="5th Semester" oninput="updatePage()">
-                        </div>
-                        <div class="form-group">
-                            <label>Submitted To (Teacher)</label>
-                            <input type="text" id="inTeacher" value="Prof. A. K. Sharma" oninput="updatePage()">
-                        </div>
-                        <div class="form-group">
-                            <label>Teacher Designation</label>
-                            <input type="text" id="inDesignation" value="Assistant Professor" oninput="updatePage()">
-                        </div>
+                    <div class="form-group">
+                        <label>Registration No</label>
+                        <input type="text" id="regNo" value="240310020" oninput="updatePreview()">
                     </div>
                 </div>
 
-                <div class="preview-wrapper">
-                    <div class="action-bar">
-                        <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print"></i> Print / Download PDF</button>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <div class="form-group">
+                        <label>Semester</label>
+                        <input type="text" id="semYear" value="4th Semester" oninput="updatePreview()">
                     </div>
+                    <div class="form-group">
+                        <label>Session</label>
+                        <input type="text" id="sessionYear" value="2025-2026" oninput="updatePreview()">
+                    </div>
+                </div>
 
-                    <div class="a4-page border-classic-double" id="a4Page">
-                        <div class="header-section">
-                            <img id="logoPreview" class="top-logo-img" src="https://via.placeholder.com/100?text=LOGO" alt="Logo">
-                            <div class="college-title" id="outCollege"></div>
-                            <div class="college-subtitle" id="outSubHeader">Department of Computer Science & Technology</div>
+                <div class="form-group">
+                    <label>Submitted To (Teacher/Professor)</label>
+                    <input type="text" id="teacherName" value="Prof. Arnab Mukherjee" oninput="updatePreview()">
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%; padding: 0.8rem; margin-top: 0.5rem;" onclick="downloadA4PDF()">
+                    <i class="fas fa-download"></i> Download Direct PDF
+                </button>
+            </div>
+
+            <!-- Single-Page Canvas Wrapper -->
+            <div class="preview-container">
+                <div class="a4-wrapper" id="pdfCaptureTarget">
+                    <div id="printableA4" class="a4-page tpl-1">
+                        <!-- Top Header Section -->
+                        <div class="a4-header">
+                            <img id="previewLogo" src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Logo" class="logo-preview">
+                            <h2 id="outCollegeName">studonext, studonext</h2>
+                            <p id="outSession">Session: 2025-2026</p>
                         </div>
 
-                        <div class="photo-frame-container" id="photoContainer">
-                            <img id="campusPhotoPreview" class="campus-photo-img" src="" alt="Campus Photo">
-                        </div>
-
-                        <div>
-                            <div class="doc-type-banner">
-                                <div class="doc-type-title" id="outDocType">PRACTICAL</div>
-                                <div class="subject-name" id="outSubject">Web Technology Lab (CST-501)</div>
-                            </div>
-
+                        <!-- Document Title Section -->
+                        <div class="a4-title-box">
+                            <div class="doc-heading" id="outDocType">A PRACTICAL FILE</div>
                             <div class="topic-box">
-                                <div class="topic-label">Project / Topic Title</div>
-                                <div class="topic-heading" id="outTopic">E-Commerce System Development with Payment Integration</div>
+                                <span>Topic Name</span>
+                                <h2 id="outTopic">Design & Implementation of Web Based Student Portal</h2>
                             </div>
                         </div>
 
-                        <div class="info-grid">
-                            <div class="info-card">
-                                <div class="info-card-header"><i class="fas fa-user"></i> Submitted By</div>
-                                <div class="info-row"><span>Name:</span> <strong id="outStudentName">Indrajit Samanta</strong></div>
-                                <div class="info-row"><span>Roll No:</span> <strong id="outRoll">123456789</strong></div>
-                                <div class="info-row"><span>Reg No:</span> <strong id="outReg">REG-2023-0987</strong></div>
-                                <div class="info-row"><span>Stream:</span> <strong id="outStream">Diploma in CST</strong></div>
-                                <div class="info-row"><span>Semester:</span> <strong id="outSem">5th Semester</strong></div>
-                            </div>
-                            <div class="info-card">
-                                <div class="info-card-header"><i class="fas fa-chalkboard-teacher"></i> Submitted To</div>
-                                <div class="info-row"><span>Teacher:</span> <strong id="outTeacher">Prof. A. K. Sharma</strong></div>
-                                <div class="info-row"><span>Designation:</span> <strong id="outDesignation">Assistant Professor</strong></div>
-                                <div class="info-row"><span>Department:</span> <strong>CST Department</strong></div>
-                            </div>
+                        <!-- Subject Info -->
+                        <div class="subject-box">
+                            <span>SUBJECT / COURSE</span>
+                            <h3 id="outSubject">Computer Science and Technology</h3>
                         </div>
 
-                        <div class="footer-signatures">
-                            <div class="signature-line">Student Signature</div>
-                            <div class="signature-line">Teacher Signature</div>
+                        <!-- Submission Footprint Section -->
+                        <div class="submission-grid">
+                            <div class="sub-block" style="text-align: left;">
+                                <strong class="title">Submitted By:</strong>
+                                <span id="outStudentName" style="font-weight: 700;">Indrajit Samanta</span><br>
+                                Roll No: <span id="outRoll" style="font-weight: 600;">000-000-000-000</span><br>
+                                Reg No: <span id="outReg" style="font-weight: 600;">240310020</span><br>
+                                Semester: <span id="outSem" style="font-weight: 600;">4th Semester</span>
+                            </div>
+
+                            <div class="sub-block" style="text-align: right;">
+                                <strong class="title">Submitted To:</strong>
+                                <span id="outTeacher" style="font-weight: 700;">Prof. Arnab Mukherjee</span><br>
+                                <span>Faculty / Department Officer</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <footer class="footer">
-            <div class="container footer-grid">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">studo<span>next</span></a>
-                    <p>Building the modern ecosystem for structural educational progress and career advancement pipelines.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Explorations</h4>
-                    <a href="predictor.html">College Predictor</a>
-                    <a href="marketplace.html">Book Marketplace</a>
-                    <a href="courses.html">Courses Hub</a>
-                </div>
-                <div class="footer-links">
-                    <h4>Legal & Support</h4>
-                    <a href="about.html">About Us</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Use</a>
-                    <a href="support.html">Contact Support</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 studonext by Indrajit Samanta. All Rights Reserved.</p>
-            </div>
-        </footer>
-
-        <div id="g_id_onload"
-             data-client_id="924536809345-ak7kuae3s5eg77dflnlqdb6uphgcrbrf.apps.googleusercontent.com"
-             data-context="signin"
-             data-ux_mode="popup"
-             data-callback="handleCredentialResponse"
-             data-auto_prompt="false">
-        </div>
-
-        <div id="loginModal" class="modal hidden">
-            <div class="modal-content login-modal-content">
-                <div class="modal-header">
-                    <h3>Access studonext</h3>
-                    <button type="button" class="close-modal" onclick="closeLoginModal()">&times;</button>
-                </div>
-                <div class="modal-body" style="text-align: center; padding: 2.5rem 2rem;">
-                    <h4 style="margin-bottom: 0.5rem;">Welcome Back!</h4>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Sign up or login instantly using your Google Identity.</p>
-                    <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
-                        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <a href="https://wa.me/917872252866?text=Hello%20StudoNext%20Support..." class="whatsapp-support-floating" target="_blank" title="Contact Student Support">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-    </div>
-
-    <div id="cyber-alert">
-        <div class="cyber-box">
-            <div class="cyber-title">SECURITY PROTOCOL</div>
-            <div class="cyber-status">Developer Tools Detected</div>
-            <div class="cyber-progress"><div class="cyber-bar"></div></div>
-            <div class="cyber-terminal">
-                > Initializing Security Engine...<br>
-                > Verifying Browser Environment...<br>
-                > Activating Protection Layer...<br>
-                > Monitoring Session Activity...<br>
-                > Access Restriction Enabled...
-            </div>
-            <div class="cyber-warning">Please close Developer Tools to continue.</div>
         </div>
     </div>
 
     <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
-        if (menuToggle && navMenu) {
-            menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+        function updatePreview() {
+            const template = document.getElementById('templateSelect').value;
+            const a4Page = document.getElementById('printableA4');
+
+            a4Page.className = 'a4-page ' + template;
+
+            document.getElementById('outCollegeName').innerText = document.getElementById('collegeName').value || 'College Name';
+            document.getElementById('outSession').innerText = 'Session: ' + (document.getElementById('sessionYear').value || '');
+            document.getElementById('outDocType').innerText = document.getElementById('docType').value;
+            document.getElementById('outTopic').innerText = document.getElementById('projectTopic').value || 'Project Title';
+            document.getElementById('outSubject').innerText = document.getElementById('subjectName').value || 'Subject Name';
+            document.getElementById('outStudentName').innerText = document.getElementById('studentName').value || 'Student Name';
+            document.getElementById('outRoll').innerText = document.getElementById('rollNo').value || 'N/A';
+            document.getElementById('outReg').innerText = document.getElementById('regNo').value || 'N/A';
+            document.getElementById('outSem').innerText = document.getElementById('semYear').value || 'N/A';
+            document.getElementById('outTeacher').innerText = document.getElementById('teacherName').value || 'Teacher Name';
         }
 
-        function updatePage() {
-            const themeColor = document.getElementById('themeColor').value;
-            document.documentElement.style.setProperty('--primary-theme', themeColor);
-            document.getElementById('a4Page').className = 'a4-page ' + document.getElementById('borderStyle').value;
-
-            document.getElementById('outCollege').innerText = document.getElementById('inCollege').value;
-            document.getElementById('outSubHeader').innerText = document.getElementById('inSubHeader').value;
-            document.getElementById('outDocType').innerText = document.getElementById('inDocType').value;
-            document.getElementById('outSubject').innerText = document.getElementById('inSubject').value;
-            document.getElementById('outTopic').innerText = document.getElementById('inTopic').value;
-            document.getElementById('outStudentName').innerText = document.getElementById('inStudentName').value;
-            document.getElementById('outRoll').innerText = document.getElementById('inRoll').value;
-            document.getElementById('outReg').innerText = document.getElementById('inReg').value;
-            document.getElementById('outStream').innerText = document.getElementById('inStream').value;
-            document.getElementById('outSem').innerText = document.getElementById('inSem').value;
-            document.getElementById('outTeacher').innerText = document.getElementById('inTeacher').value;
-            document.getElementById('outDesignation').innerText = document.getElementById('inDesignation').value;
-        }
-
-        function previewImage(event, targetId) {
-            const target = document.getElementById(targetId);
-            if (event.target.files && event.target.files[0]) {
-                target.src = URL.createObjectURL(event.target.files[0]);
-                target.onload = () => URL.revokeObjectURL(target.src);
+        function handleLogoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewLogo').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
             }
         }
 
-        const loginModal = document.getElementById('loginModal');
-        function openLoginModal() { if (loginModal) loginModal.classList.remove('hidden'); }
-        function closeLoginModal() { if (loginModal) loginModal.classList.add('hidden'); }
+        // Direct PDF Export using exact dimensions & zero margins
+        function downloadA4PDF() {
+            const element = document.getElementById('pdfCaptureTarget');
+            const studentName = document.getElementById('studentName').value || 'Project';
+            const filename = `${studentName.trim().replace(/\s+/g, '_')}_Front_Page.pdf`;
 
-        let cyberTriggered = false;
-        function activateCyberAlert() {
-            if (cyberTriggered) return;
-            cyberTriggered = true;
-            document.getElementById("cyber-alert").classList.add("active");
+            const opt = {
+                margin:       0,
+                filename:     filename,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    logging: false,
+                    width: 794,
+                    height: 1122
+                },
+                jsPDF:        { unit: 'pt', format: [794, 1122], orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
         }
 
-        setInterval(() => {
-            if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
-                activateCyberAlert();
-            }
-        }, 1000);
+        document.addEventListener('DOMContentLoaded', updatePreview);
     </script>
 </body>
 </html>
